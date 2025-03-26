@@ -1,0 +1,172 @@
+.MainSectionLogin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+
+.LoginFormData {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.LoginImage {
+    flex: 1;
+    height: 100%;
+    background-color: #021938;   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.LoginImage img {
+    max-height: 300px; 
+    width: auto;
+}
+.Login h1 {
+    color: #0186ff;
+}
+.Login {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.Form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.Input {
+    padding: 15px;
+    width: 100%;
+    max-width: 600px;
+    border-radius: 5px;
+    border: 1px solid #0d4998;
+    transition: all 0.3s ease;
+}
+
+.Input:focus {
+    border-color: #3498db; 
+    box-shadow: 0 0 8px rgba(52, 152, 219, 0.8); 
+    outline: none; 
+}
+.loginBtn {
+    padding: 15px;
+    border-radius: 40px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #fff;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+}
+.loginBtn:hover {
+    background: linear-gradient(90deg, #0072ff, #00c6ff);
+}
+.noAccount {
+    color: red;
+}
+.newUser{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    color: #0186ff;
+    text-align: center;
+    margin-top: 10px;
+}
+.loginLink {
+    margin-left: 10px;
+    text-decoration: none;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 50px;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+}
+
+.goToSignUp{
+    text-decoration: none;
+    padding: 12px 22px;
+    border-radius: 40px;
+    color: #fff;
+    background: linear-gradient(90deg, #00c6ff, #0072ff);
+    transition: 0.4s ease-in-out;
+}
+
+.goToSignUp:hover {
+    background: linear-gradient(90deg, #0072ff, #00c6ff);
+}
+
+/* media queries */
+
+@media screen and (max-width: 768px) {
+    .MainSectionLogin {
+        display: flex;
+        flex-direction: column;
+    }
+    .LoginFormData {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .MainSectionLogin {
+        padding: 20px;
+        height: auto;
+     }
+    .LoginFormData {
+        padding: 10px;
+        height: auto;
+        box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+    }
+    
+    .Login {
+        padding-top: 0;
+    }
+    .LoginImage{
+        background-color: #fff;
+        padding: 20px;
+    }
+    .LoginImage img {
+        height: 200px;
+        width: auto;
+    }
+    .loginBtn {
+        font-size: 14px;
+    }
+    .haveAnAccount p {
+        font-size: 12px;
+    }
+    .goToSignUp {
+        font-size: 14px;
+    }
+    .newUser p {
+        font-size: 12px;
+    }
+}
+
+.passwordContainer {
+    position: relative;
+}
+
+.eyeIcon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
