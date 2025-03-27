@@ -25,10 +25,8 @@
     justify-content: center;
     align-items: center;
 }
-
-.signupImage img {
-    max-height: 300px;
-    width: auto;
+.heading {
+    color: #fff;
 }
 
 .signup {
@@ -37,7 +35,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 40px;
     gap: 20px;
 }
 
@@ -46,7 +44,7 @@
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    max-width: 600px;
+    max-width: 630px;
 }
 
 input {
@@ -103,16 +101,17 @@ input:focus {
 }
 .errorText{
     color: red;
-    font-size: 14px; /* Optional: Adjust font size */
+    font-size: 14px; 
 }
-
-
 
 /* Media Queries for Responsiveness */
 @media screen and (max-width: 1024px) {
     .mainSection {
         height: 110vh;
         width: 100%;
+    }
+    .signupImage {
+        height: 104%;
     }
 }
 
@@ -129,11 +128,9 @@ input:focus {
 
 @media screen and (max-width: 500px) {
     .signupFormData {
-        padding: 10px;
         height: auto;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
         margin-bottom: 20px;
-        border-radius: 10px;
     }
     .mainSection {
        padding: 20px;
@@ -143,7 +140,6 @@ input:focus {
         padding-top: 0;
     }
     .signupImage {
-        background-color: #fff;
         padding: 20px;
     }
     .signupImage img {
@@ -161,6 +157,12 @@ input:focus {
     }
     .loginLink {
         font-size: 14px;
+    }
+    .heading {
+        font-size: 18px;
+    }
+    input {
+        width: 90%;
     }
 }
 

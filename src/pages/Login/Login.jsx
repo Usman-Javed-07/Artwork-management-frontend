@@ -38,7 +38,7 @@ export const Login = () => {
         <div className={styles.MainSectionLogin}>
             <div className={styles.LoginFormData}>
                 <div className={styles.LoginImage}>
-                    <img src="mainLogo.png" alt="login image" />
+                <h1 className={styles.heading}>Private Artwork Management</h1>
                 </div>
                 <div className={styles.Login}>
                     <h1>Login</h1>

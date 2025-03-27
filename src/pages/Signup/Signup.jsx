@@ -115,7 +115,7 @@ export const Signup = () => {
         <div className={styles.mainSection}>
             <div className={styles.signupFormData}>
                 <div className={styles.signupImage}>
-                    <img src="mainLogo.png" alt="signup" />
+                <h1 className={styles.heading}>Private Artwork Management</h1>
                 </div>
                 <div className={styles.signup}>
                     <h1>Register</h1>

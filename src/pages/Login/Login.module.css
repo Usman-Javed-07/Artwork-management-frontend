@@ -21,11 +21,10 @@
     justify-content: center;
     align-items: center;
 }
-
-.LoginImage img {
-    max-height: 300px; 
-    width: auto;
+.heading {
+    color: #fff;
 }
+
 .Login h1 {
     color: #0186ff;
 }
@@ -35,19 +34,19 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 40px;
     gap: 20px;
 }
 
-.Form {
+Form {
     display: flex;
     flex-direction: column;
     gap: 20px;
     width: 100%;
-    max-width: 600px;
+    max-width: 630px;
 }
 
-.Input {
+Input {
     padding: 15px;
     width: 100%;
     max-width: 600px;
@@ -112,10 +111,7 @@
 /* media queries */
 
 @media screen and (max-width: 768px) {
-    .MainSectionLogin {
-        display: flex;
-        flex-direction: column;
-    }
+   
     .LoginFormData {
         display: flex;
         flex-direction: column;
@@ -128,18 +124,15 @@
         height: auto;
      }
     .LoginFormData {
-        padding: 10px;
         height: auto;
         box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
         margin-bottom: 20px;
-        border-radius: 10px;
     }
     
     .Login {
         padding-top: 0;
     }
     .LoginImage{
-        background-color: #fff;
         padding: 20px;
     }
     .LoginImage img {
@@ -157,6 +150,12 @@
     }
     .newUser p {
         font-size: 12px;
+    }
+    .heading {
+        font-size: 18px;
+    }
+    input {
+        width: 90%;
     }
 }
 
