@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getArtworks, deleteArtwork } from "../../services/artworkService";
 import { Link } from "react-router-dom";
+import styles from "../Home/Home.module.css";
 
 const Home = () => {
   const [artworks, setArtworks] = useState([]);
@@ -22,9 +23,12 @@ const Home = () => {
   };
 
   return (
-    <div>
-      <h2>Artworks</h2>
+    <div className={styles.homeContainer}>
+      <nav className={styles.navArt}>
       <Link to="/ArtworkList">Add Artwork</Link>
+      </nav>
+
+      
       <div className="artwork-grid">
         {artworks.map((art) => (
           <div key={art.id} className="artwork-card">
