@@ -6,6 +6,7 @@ import { ErrorPage } from "./pages/ErrorPage/ErrorPage";
 import PrivateRoute from "./components/Layouts/PrivateRoute";
 import ArtworkList from "./pages/ArtworkList/ArtworkList";
 import { AuthProvider } from "./components/Context/AuthContext";
+import EditArtwork from "./pages/EditArtwork/EditArtwork"
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
       {
         path: "ArtworkList",
         element: <PrivateRoute element={<ArtworkList />} />,
+      },
+      {
+        path: "edit/:id", 
+        element: <PrivateRoute element={<EditArtwork />} />, 
       },
     ],
   },
