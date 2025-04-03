@@ -64,7 +64,7 @@ Input:focus {
 
 .signupBtn {
     padding: 15px;
-    border-radius: 40px;
+    /* border-radius: 40px; */
     border: none;
     cursor: pointer;
     font-size: 1.1rem;
@@ -90,7 +90,7 @@ Input:focus {
     text-decoration: none;
     border: none;
     padding: 12px 30px;
-    border-radius: 50px;
+    /* border-radius: 50px; */
     cursor: pointer;
     color: #fff;
     background: linear-gradient(90deg, #00c6ff, #0072ff);

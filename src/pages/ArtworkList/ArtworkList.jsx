@@ -65,6 +65,7 @@ const ArtworkForm = () => {
       </nav>
 
       <h2>{id ? "Edit Artwork" : "Add New Artwork"}</h2>
+      
       <form onSubmit={handleSubmit} className={styles.artworkListForm}>
         <input
           className={styles.ArtworkFormInput}
