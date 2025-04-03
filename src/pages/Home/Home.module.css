@@ -28,6 +28,7 @@
     justify-self: center;
     align-items: center;
     gap: 50px;
+    padding-bottom: 40px;
 }
 /* Medium screens (tablets) */
 @media (max-width: 1024px) {
