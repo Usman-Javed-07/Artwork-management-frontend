@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getArtworks, deleteArtwork } from "../../services/artworkService";
 import { Link } from "react-router-dom";
 import styles from "../Home/Home.module.css";
+import { toast } from 'react-toastify';
 
 const Home = () => {
   const [artworks, setArtworks] = useState([]);
@@ -15,17 +16,36 @@ const Home = () => {
     setArtworks(data);
   };
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this artwork?")) {
-      await deleteArtwork(id);
-      loadArtworks();
-    }
+  const handleDelete = (id) => {
+    toast.info(
+      <div>
+        <p>Are you sure you want to delete this artwork?</p>
+        <button onClick={() => confirmDelete(id)} style={{ marginRight: "10px" }}>
+          Yes
+        </button>
+        <button onClick={cancelDelete}>No</button>
+      </div>,
+      { autoClose: false, closeOnClick: false }
+    );
   };
+  
+  const confirmDelete = async (id) => {
+    if (!id) return; 
+    await deleteArtwork(id); 
+    toast.dismiss();
+    toast.success("Artwork deleted successfully!");
+    loadArtworks();
+  };
+  
+  const cancelDelete = () => {
+    toast.dismiss();
+  };
+  
 
   return (
     <div className={styles.homeContainer}>
       <nav className={styles.navArt}>
-      <Link to="/ArtworkList">Add Artwork</Link>
+      <Link className={styles.addArtwork} to="/ArtworkList">Add New Artwork</Link>
       </nav>
 
       
@@ -41,8 +61,11 @@ const Home = () => {
             <p>
               {art.artist} - {art.year}
             </p>
-            <Link to={`/edit/${art.id}`}>Edit</Link>
-            <button onClick={() => handleDelete(art.id)}>Delete</button>
+            <div className={styles.artworkBtn}>
+            <Link className={styles.editBtn} to={`/edit/${art.id}`}>Edit</Link>
+            <button className={styles.deleteBtn} onClick={() => handleDelete(art.id)}>Delete</button>
+            </div>
+            
             </div>
           </div>
         ))}

@@ -1,0 +1,22 @@
+.artworkList {
+    background: #021938f4;
+    padding: 20px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.goHome {
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding: 5px 20px;
+    color: #fff; 
+    background-image: linear-gradient(blue,blue);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position-x: right;
+    transition: background-size 500ms;
+}
+.goHome:hover {
+    background-size: 100% 100%;
+    background-position-x: left;
+}

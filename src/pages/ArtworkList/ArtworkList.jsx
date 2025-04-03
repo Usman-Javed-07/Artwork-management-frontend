@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { createArtwork, updateArtwork, getArtworkById } from "../../services/artworkService";
 import { useNavigate, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import styles from "../ArtworkList/ArtworkList.module.css";
 
 const ArtworkForm = () => {
   const [form, setForm] = useState({
@@ -52,6 +54,11 @@ const ArtworkForm = () => {
 
   return (
     <div>
+      <nav className={styles.artworkList}>
+      <Link to="/Home" className={styles.goHome}>Home</Link>
+      </nav>
+      
+      
       <h2>{id ? "Edit Artwork" : "Add New Artwork"}</h2>
       <form onSubmit={handleSubmit}>
         <input type="text" name="artist" value={form.artist} onChange={handleChange} placeholder="Artist" required />

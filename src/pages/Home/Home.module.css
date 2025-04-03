@@ -1,8 +1,26 @@
 .navArt {
-    background: #888585ac;
-    padding: 25px;
+    /* background: #888585ac; */
+    /* background: linear-gradient(90deg, #00c6ff, #0072ff); */
+    background: #021938f4;
+    padding: 15px;
+    display: flex;
+    justify-content: flex-end;
 }
-
+.addArtwork {
+    text-decoration: none;
+    border: 1px solid #fff;
+    padding: 10px 20px;
+    color: #fff; 
+    background-image: linear-gradient(blue,blue);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position-x: right;
+    transition: background-size 500ms;
+}
+.addArtwork:hover {
+    background-size: 100% 100%;
+    background-position-x: left;
+}
 .artworkGrid{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -11,6 +29,31 @@
     align-items: center;
     gap: 50px;
 }
+/* Medium screens (tablets) */
+@media (max-width: 1024px) {
+    .artworkGrid {
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 30px;
+    }
+}
+
+/* Small screens (mobile) */
+@media (max-width: 768px) {
+    .artworkGrid {
+        grid-template-columns: repeat(2, 1fr); 
+        gap: 20px;
+    }
+}
+
+/* Extra small screens (phones) */
+@media (max-width: 480px) {
+    .artworkGrid {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 15px;
+    }
+}
+    
+
 .artworkCard {
     background: linear-gradient(180deg, #ffffff, #9999994f);
     max-width: 300px;
@@ -34,3 +77,47 @@
     padding: 5px;
     margin: 0px !important;
 }
+.artworkBtn {
+    margin-top: 40px;
+    display: flex;
+    justify-content: end;
+    gap: 5px;
+}
+.editBtn {
+    padding: 5px 20px;
+    text-decoration: none;
+    font-size: 12px;
+    border: 1px solid blue;
+    background-image: linear-gradient(darkblue, darkblue);
+    background-color: blue;
+    color: #fff;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position-x: right;
+    transition: background-size 500ms;
+}
+.editBtn:hover {
+    background-size: 100% 100%;
+    background-position-x: left; 
+    border: 1px solid darkblue;  
+}
+.deleteBtn {
+    padding: 5px 10px;
+    font-size: 12px;
+    border: 1px solid red;
+    background-color: red;
+    color: #fff;
+    cursor: pointer;
+    background-image: linear-gradient(darkred,darkred);
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position-x: right;
+    transition: background-size 500ms;
+}
+.deleteBtn:hover {
+    background-size: 100% 100%;
+    background-position-x: left;  
+    border: 1px solid darkred; 
+}
+
+
