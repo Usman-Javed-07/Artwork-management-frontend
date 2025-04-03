@@ -29,20 +29,21 @@ const Home = () => {
       </nav>
 
       
-      <div className="artwork-grid">
+      <div className={styles.artworkGrid}>
         {artworks.map((art) => (
-          <div key={art.id} className="artwork-card">
+          <div key={art.id} className={styles.artworkCard}>
             <img
               src={`http://localhost:5000${art.pictureUrl}`}
               alt={art.title}
-              width="100"
             />
-            <h3>{art.title}</h3>
+            <div className={styles.artworkInfo}>
+            <p>{art.title}</p>
             <p>
               {art.artist} - {art.year}
             </p>
             <Link to={`/edit/${art.id}`}>Edit</Link>
             <button onClick={() => handleDelete(art.id)}>Delete</button>
+            </div>
           </div>
         ))}
       </div>

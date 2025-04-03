@@ -2,3 +2,35 @@
     background: #888585ac;
     padding: 25px;
 }
+
+.artworkGrid{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding-top: 30px;
+    justify-self: center;
+    align-items: center;
+    gap: 50px;
+}
+.artworkCard {
+    background: linear-gradient(180deg, #ffffff, #9999994f);
+    max-width: 300px;
+}
+.artworkCard img {
+    padding: 40px 40px 0px 40px;
+    width: 220px;
+    height: 170px;
+    object-fit: cover;
+    display: flex;
+    margin: 0 auto;
+}
+.artworkInfo {
+    padding: 20px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 500;
+    color: #000000b2;
+}
+.artworkInfo p {
+    padding: 5px;
+    margin: 0px !important;
+}
