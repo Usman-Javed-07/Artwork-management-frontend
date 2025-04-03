@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { createArtwork, updateArtwork, getArtworkById } from "../../services/artworkService";
+import {
+  createArtwork,
+  updateArtwork,
+  getArtworkById,
+} from "../../services/artworkService";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styles from "../ArtworkList/ArtworkList.module.css";
@@ -55,26 +59,117 @@ const ArtworkForm = () => {
   return (
     <div>
       <nav className={styles.artworkList}>
-      <Link to="/Home" className={styles.goHome}>Home</Link>
+        <Link to="/Home" className={styles.goHome}>
+          Home
+        </Link>
       </nav>
-      
-      
+
       <h2>{id ? "Edit Artwork" : "Add New Artwork"}</h2>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="artist" value={form.artist} onChange={handleChange} placeholder="Artist" required />
-        <input type="text" name="title" value={form.title} onChange={handleChange} placeholder="Title" required />
-        <input type="number" name="year" value={form.year} onChange={handleChange} placeholder="Year" required />
-        <input type="text" name="dimensions" value={form.dimensions} onChange={handleChange} placeholder="Dimensions" required />
-        <input type="text" name="technique" value={form.technique} onChange={handleChange} placeholder="Technique" required />
-        <input type="text" name="medium" value={form.medium} onChange={handleChange} placeholder="Medium" required />
-        <input type="number" name="numberOfEditions" value={form.numberOfEditions} onChange={handleChange} placeholder="Number of Editions" />
-        <input type="number" name="editionNumber" value={form.editionNumber} onChange={handleChange} placeholder="Edition Number" />
-        <textarea name="provenance" value={form.provenance} onChange={handleChange} placeholder="Provenance"></textarea>
-        <textarea name="literatureList" value={form.literatureList} onChange={handleChange} placeholder="Literature List"></textarea>
-        <textarea name="exhibitionList" value={form.exhibitionList} onChange={handleChange} placeholder="Exhibition List"></textarea>
-        <textarea name="extraInformation" value={form.extraInformation} onChange={handleChange} placeholder="Extra Information"></textarea>
-        <input type="file" onChange={handleFileChange} />
-        <button type="submit">{id ? "Update" : "Submit"}</button>
+      <form onSubmit={handleSubmit} className={styles.artworkListForm}>
+        <input
+          className={styles.ArtworkFormInput}
+          type="text"
+          name="artist"
+          value={form.artist}
+          onChange={handleChange}
+          placeholder="Artist"
+          required
+        />
+        <input
+          className={styles.ArtworkFormInput}
+          type="text"
+          name="title"
+          value={form.title}
+          onChange={handleChange}
+          placeholder="Title"
+          required
+        />
+        <input
+          className={styles.ArtworkFormInput}
+          type="number"
+          name="year"
+          value={form.year}
+          onChange={handleChange}
+          placeholder="Year"
+          required
+        />
+        <input
+          className={styles.ArtworkFormInput}
+          type="text"
+          name="dimensions"
+          value={form.dimensions}
+          onChange={handleChange}
+          placeholder="Dimensions"
+          required
+        />
+        <input
+          className={styles.ArtworkFormInput}
+          type="text"
+          name="technique"
+          value={form.technique}
+          onChange={handleChange}
+          placeholder="Technique"
+          required
+        />
+        <input
+          className={styles.ArtworkFormInput}
+          type="text"
+          name="medium"
+          value={form.medium}
+          onChange={handleChange}
+          placeholder="Medium"
+          required
+        />
+        <input
+          className={styles.ArtworkFormInput}
+          type="number"
+          name="numberOfEditions"
+          value={form.numberOfEditions}
+          onChange={handleChange}
+          placeholder="Number of Editions"
+        />
+        <input
+          className={styles.ArtworkFormInput}
+          type="number"
+          name="editionNumber"
+          value={form.editionNumber}
+          onChange={handleChange}
+          placeholder="Edition Number"
+        />
+        <textarea
+          className={styles.ArtworkFormInput}
+          name="provenance"
+          value={form.provenance}
+          onChange={handleChange}
+          placeholder="Provenance"
+        ></textarea>
+        <textarea
+          className={styles.ArtworkFormInput}
+          name="literatureList"
+          value={form.literatureList}
+          onChange={handleChange}
+          placeholder="Literature List"
+        ></textarea>
+        <textarea
+          className={styles.ArtworkFormInput}
+          name="exhibitionList"
+          value={form.exhibitionList}
+          onChange={handleChange}
+          placeholder="Exhibition List"
+        ></textarea>
+        <textarea
+          className={styles.ArtworkFormInput}
+          name="extraInformation"
+          value={form.extraInformation}
+          onChange={handleChange}
+          placeholder="Extra Information"
+        ></textarea>
+        <input
+          className={styles.ArtworkFormInput}
+          type="file"
+          onChange={handleFileChange}
+        />
+        <button className={styles.submitButton} type="submit">{id ? "Update" : "Submit"}</button>
       </form>
     </div>
   );

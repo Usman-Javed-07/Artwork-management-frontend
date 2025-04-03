@@ -1,10 +1,10 @@
+
 .artworkList {
     background: #021938f4;
     padding: 20px;
     display: flex;
     justify-content: flex-end;
 }
-
 .goHome {
     text-decoration: none;
     border: 1px solid #fff;
@@ -20,10 +20,9 @@
     background-size: 100% 100%;
     background-position-x: left;
 }
-
 .artworkListForm {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* Two columns */
     gap: 50px;
     max-width: 1100px;
     justify-content: center;
@@ -32,26 +31,35 @@
     margin: 0 auto;
     padding: 10px;
 }
-@media screen and (max-width:1024px) {
-    .artworkListForm  {
+
+/* Wrap label and input together */
+.artworkFormGroup {
+    display: flex;
+    flex-direction: column; /* Ensures label is above input */
+}
+
+@media screen and (max-width: 1024px) {
+    .artworkListForm {
         grid-template-columns: repeat(2, 1fr);
         max-width: 700px;
+        
     }
 }
-@media screen and (max-width:500px) {
-    .artworkListForm  {
-        grid-template-columns: repeat(1, 1fr);
+
+@media screen and (max-width: 500px) {
+    .artworkListForm {
+        grid-template-columns: repeat(1, 1fr); /* One column on smaller screens */
         max-width: 200px;
         gap: 10px;
     }
 }
+
 .ArtworkFormInput {
-    padding: 15px;
+    padding: 12px;
     border-radius: 5px;
     border: 1px solid #0d4998;
     transition: all 0.3s ease;
 }
-
 .submitButton {
     text-decoration: none;
     border: 1px solid #fff;

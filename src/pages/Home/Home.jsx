@@ -15,6 +15,12 @@ const Home = () => {
     const data = await getArtworks();
     setArtworks(data);
   };
+//  const handleDelete = async (id) => {
+//     if (window.confirm("Are you sure you want to delete this artwork?")) {
+//       await deleteArtwork(id);
+//       loadArtworks();
+//     }
+//   };
 
   const handleDelete = (id) => {
     toast.info(

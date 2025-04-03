@@ -121,6 +121,7 @@ export const Signup = () => {
                     <h1>Register</h1>
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <input
+                            className={styles.Input}
                             type="text"
                             name="username"
                             required
@@ -130,6 +131,7 @@ export const Signup = () => {
                             onChange={handleChange}
                         />
                         <input
+                            className={styles.Input}
                             type="text"
                             name="FirstName"
                             required
@@ -140,6 +142,7 @@ export const Signup = () => {
                         />
                         {nameError && <p className={styles.errorText}>{nameError}</p>}
                         <input
+                            className={styles.Input}
                             type="text"
                             name="LastName"
                             required
@@ -150,6 +153,7 @@ export const Signup = () => {
                         />
                         {nameError && <p className={styles.errorText}>{nameError}</p>}
                         <input
+                            className={styles.Input}
                             type="email"
                             name="email"
                             required
@@ -161,6 +165,7 @@ export const Signup = () => {
 
                         <div className={styles.passwordContainer}>
                             <input
+                                className={styles.Input}
                                 type={showPassword ? "text" : "password"} 
                                 name="password"
                                 required
@@ -179,6 +184,7 @@ export const Signup = () => {
 
                         <div className={styles.passwordContainer}>
                             <input
+                                className={styles.Input}
                                 type={showConfirmPassword ? "text" : "password"}
                                 name="confirmPassword"
                                 required

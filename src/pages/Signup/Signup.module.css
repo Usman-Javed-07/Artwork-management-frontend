@@ -47,7 +47,7 @@
     max-width: 630px;
 }
 
-input {
+.Input {
     padding: 15px;
     width: 100%;
     max-width: 600px;
@@ -56,7 +56,7 @@ input {
     transition: all 0.3s ease;
 }
 
-input:focus {
+Input:focus {
     border-color: #3498db;
     box-shadow: 0 0 8px rgba(52, 152, 219, 0.8);
     outline: none;

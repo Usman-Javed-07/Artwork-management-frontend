@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { getArtworkById, updateArtwork } from "../../services/artworkService";
+import styles from "../EditArtwork/EditArtwork.module.css";
+import { Link } from "react-router-dom";
+
 
 const EditArtwork = () => {
   const { id } = useParams(); // Get artwork ID from the URL
@@ -42,28 +45,49 @@ const EditArtwork = () => {
 
   return (
     <div>
+        <nav className={styles.artworkList}>
+        <Link to="/Home" className={styles.goHome}>
+          Home
+        </Link>
+      </nav>
       <h2>Edit Artwork</h2>
-      <form onSubmit={handleSubmit}>
+
+
+      <form onSubmit={handleSubmit} className={styles.artworkListForm}>
+    <div className={styles.artworkFormGroup}>
         <label>Artist:</label>
-        <input type="text" name="artist" value={artwork.artist} onChange={handleChange} required />
+        <input className={styles.ArtworkFormInput} type="text" name="artist" value={artwork.artist} onChange={handleChange} required />
+    </div>
 
+    <div className={styles.artworkFormGroup}>
         <label>Title:</label>
-        <input type="text" name="title" value={artwork.title} onChange={handleChange} required />
+        <input className={styles.ArtworkFormInput} type="text" name="title" value={artwork.title} onChange={handleChange} required />
+    </div>
 
+    <div className={styles.artworkFormGroup}>
         <label>Year:</label>
-        <input type="number" name="year" value={artwork.year} onChange={handleChange} required />
+        <input className={styles.ArtworkFormInput} type="number" name="year" value={artwork.year} onChange={handleChange} required />
+    </div>
 
+    <div className={styles.artworkFormGroup}>
         <label>Dimensions:</label>
-        <input type="text" name="dimensions" value={artwork.dimensions} onChange={handleChange} required />
+        <input className={styles.ArtworkFormInput} type="text" name="dimensions" value={artwork.dimensions} onChange={handleChange} required />
+    </div>
 
+    <div className={styles.artworkFormGroup}>
         <label>Technique:</label>
-        <input type="text" name="technique" value={artwork.technique} onChange={handleChange} required />
+        <input className={styles.ArtworkFormInput} type="text" name="technique" value={artwork.technique} onChange={handleChange} required />
+    </div>
 
+    <div className={styles.artworkFormGroup}>
         <label>Medium:</label>
-        <input type="text" name="medium" value={artwork.medium} onChange={handleChange} required />
+        <input className={styles.ArtworkFormInput} type="text" name="medium" value={artwork.medium} onChange={handleChange} required />
+    </div>
+        <button className={styles.submitButton} type="submit">Update Artwork</button>
+</form>
 
-        <button type="submit">Update Artwork</button>
-      </form>
+
+
     </div>
   );
 };
