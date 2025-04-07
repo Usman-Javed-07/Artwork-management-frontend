@@ -19,6 +19,7 @@ const ArtworkForm = () => {
     literatureList: "",
     exhibitionList: "",
     extraInformation: "",
+    invoice: null,
   });
 
   const [file, setFile] = useState(null);
@@ -408,6 +409,31 @@ const ArtworkForm = () => {
       placeholder="Extra Information"
     ></textarea>
   </label>
+  <label>
+  Invoice (Upload as picture or file)
+  <input
+    className={styles.ArtworkFormInput}
+    type="file"
+    name="invoice"
+    accept="image/*,.pdf"
+    onChange={(e) => setForm({ ...form, invoice: e.target.files[0] })}
+    required 
+  />
+</label>
+
+{/* {form.invoice && (
+  <div>
+    <p>Uploaded File: {form.invoice.name}</p>
+    {form.invoice.type.startsWith("image/") && (
+      <img
+        src={URL.createObjectURL(form.invoice)}
+        alt="Invoice Preview"
+        style={{ maxWidth: "200px", marginTop: "10px" }}
+      />
+    )}
+  </div>
+)} */}
+
 
           {/* Upload Image Field */}
           <label>
@@ -419,6 +445,7 @@ const ArtworkForm = () => {
               required
             />
           </label>
+          
         </form>
         <div className={styles.artworkSubmitBtn}>
             <button className={styles.submitButton} type="submit" form="artworkForm">
