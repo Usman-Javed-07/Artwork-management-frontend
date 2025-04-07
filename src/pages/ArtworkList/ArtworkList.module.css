@@ -124,3 +124,43 @@
     color: #0d4998;
   }
   
+.addNewTechnique {
+    border: 1px solid #fff;
+    padding: 10px 100px; 
+    color: #fff; 
+    cursor: pointer;
+    background-image: linear-gradient(blue,blue);
+    background-color:  #0d4998;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position-x: right;
+    transition: background-size 500ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px; 
+}
+.addNewTechnique:hover{
+    background-size: 100% 100%;
+    background-position-x: left;
+}
+.addSubTechnique {
+    border: 1px solid #fff;
+    padding: 10px 100px; 
+    color: #fff; 
+    cursor: pointer;
+    background-image: linear-gradient(blue,blue);
+    background-color:  #0d4998;
+    background-repeat: no-repeat;
+    background-size: 0% 100%;
+    background-position-x: right;
+    transition: background-size 500ms;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px; 
+}
+.addSubTechnique:hover{
+    background-size: 100% 100%;
+    background-position-x: left;
+}
