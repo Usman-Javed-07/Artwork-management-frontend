@@ -7,6 +7,7 @@ import PrivateRoute from "./components/Layouts/PrivateRoute";
 import ArtworkList from "./pages/ArtworkList/ArtworkList";
 import { AuthProvider } from "./components/Context/AuthContext";
 import EditArtwork from "./pages/EditArtwork/EditArtwork"
+import ArtworkDetail from "./pages/ArtworkDetailPage/ArtworkDetail";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
       {
         path: "edit/:id", 
         element: <PrivateRoute element={<EditArtwork />} />, 
+      },
+      {
+        path: "/ArtworkDetail/:id",
+        element: <PrivateRoute element={<ArtworkDetail/>}></PrivateRoute>
       },
     ],
   },

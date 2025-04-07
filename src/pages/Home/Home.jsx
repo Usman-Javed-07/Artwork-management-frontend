@@ -58,10 +58,13 @@ const Home = () => {
       <div className={styles.artworkGrid}>
         {artworks.map((art) => (
           <div key={art.id} className={styles.artworkCard}>
-            <img
-              src={`http://localhost:5000${art.pictureUrl}`}
-              alt={art.title}
-            />
+            <Link to={`/ArtworkDetail/${art.id}`}>
+        <img
+          src={`http://localhost:5000${art.pictureUrl}`}
+          alt={art.title}
+        />
+      </Link>
+
             <div className={styles.artworkInfo}>
             <p>{art.title}</p>
             <p>
