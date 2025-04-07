@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import axios from "axios";
 import styles from "../ArtworkList/ArtworkList.module.css";
 
 const ArtworkForm = () => {
@@ -98,11 +99,18 @@ const ArtworkForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here, you'd handle form submission, like sending the data to your backend.
+  
     const formData = new FormData();
     Object.keys(form).forEach((key) => formData.append(key, form[key]));
     if (file) formData.append("picture", file);
-    navigate("/Home");
+  
+    try {
+      const response = await axios.post("http://localhost:5000/api/artworks", formData);
+      console.log("Artwork submitted:", response.data);
+      navigate("/Home");
+    } catch (error) {
+      console.error("Error submitting artwork:", error);
+    }
   };
 
   return (
@@ -351,6 +359,7 @@ const ArtworkForm = () => {
               className={styles.ArtworkFormInput}
               type="file"
               onChange={handleFileChange}
+              required
             />
           </label>
         </form>
