@@ -30,6 +30,12 @@ const ArtworkForm = () => {
     };
   });
 
+  const [mediums, setMediums] = useState(() => {
+    const stored = localStorage.getItem("mediums");
+    return stored ? JSON.parse(stored) : [];
+  });
+
+  const [newMedium, setNewMedium] = useState("");
   const [newTechnique, setNewTechnique] = useState(""); 
   const [newSubTechnique, setNewSubTechnique] = useState(""); 
   const navigate = useNavigate();
@@ -111,6 +117,12 @@ const ArtworkForm = () => {
     } catch (error) {
       console.error("Error submitting artwork:", error);
     }
+    if (!mediums.includes(form.medium)) {
+      const updated = [...mediums, form.medium];
+      setMediums(updated);
+      localStorage.setItem("mediums", JSON.stringify(updated));
+    }
+    
   };
 
   return (
@@ -269,18 +281,63 @@ const ArtworkForm = () => {
           )}
 
           {/* Medium Field */}
+          {form.medium === "addNew" && (
+  <label>
+    New Medium Name
+    <input
+      className={styles.ArtworkFormInput}
+      type="text"
+      value={newMedium}
+      onChange={(e) => setNewMedium(e.target.value)}
+      placeholder="Enter new medium"
+      required
+    />
+    <button
+      type="button"
+      onClick={() => {
+        const trimmed = newMedium.trim();
+        if (trimmed && !mediums.includes(trimmed)) {
+          const updated = [...mediums, trimmed];
+          setMediums(updated);
+          localStorage.setItem("mediums", JSON.stringify(updated));
+          setForm({ ...form, medium: trimmed });
+          setNewMedium("");
+        } else {
+          alert("Please enter a unique and valid medium name");
+        }
+      }}
+      className={styles.addSubTechnique}
+    >
+      Add New Medium
+    </button>
+  </label>
+)}
+
           <label>
-            Medium
-            <input
-              className={styles.ArtworkFormInput}
-              type="text"
-              name="medium"
-              value={form.medium}
-              onChange={handleChange}
-              placeholder="Medium"
-              required
-            />
-          </label>
+  Medium
+  <select
+    className={styles.ArtworkFormInput}
+    name="medium"
+    value={form.medium}
+    onChange={(e) => {
+      const selected = e.target.value;
+      setForm({ ...form, medium: selected });
+      if (selected !== "addNew") {
+        setNewMedium("");
+      }
+    }}
+    required
+  >
+    <option value="">Select Medium</option>
+    {mediums.map((medium, index) => (
+      <option key={index} value={medium}>
+        {medium}
+      </option>
+    ))}
+    <option value="addNew">Add new medium...</option>
+  </select>
+</label>
+
 
           {/* Other Fields */}
           <label>
