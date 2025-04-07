@@ -61,7 +61,7 @@ const ArtworkForm = () => {
 
   const handleAddNewTechnique = () => {
     const trimmedTechnique = newTechnique.trim();
-    if (trimmedTechnique && !techniques.hasOwnProperty(trimmedTechnique)) {
+    if (trimmedTechnique && !techniques.hasOwnProperty.call(techniques, trimmedTechnique)) {
       setTechniques((prevTechniques) => {
         const updatedTechniques = {
           ...prevTechniques,
