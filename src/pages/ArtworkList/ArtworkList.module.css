@@ -129,6 +129,13 @@
     background-size: 100% 100%;
     background-position-x: left;
 }
+@media screen and (max-width:500px) {
+    .addNewTechnique {
+        padding: 8px;
+        width: 100%;
+        margin: 0 auto;
+    }
+}
 .addSubTechnique {
     border: 1px solid #fff;
     padding: 10px 100px; 
@@ -148,6 +155,13 @@
 .addSubTechnique:hover{
     background-size: 100% 100%;
     background-position-x: left;
+}
+@media screen and (max-width:500px) {
+    .addSubTechnique {
+        padding: 8px;
+        width: 100%;
+        margin: 0 auto;
+    }
 }
 
 

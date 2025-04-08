@@ -43,6 +43,7 @@ const ArtworkForm = () => {
   const [newMedium, setNewMedium] = useState("");
   const [newTechnique, setNewTechnique] = useState("");
   const [newSubTechnique, setNewSubTechnique] = useState("");
+  const [subTechniqueVisible, setSubTechniqueVisible] = useState(true); // New state for visibility
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -63,10 +64,12 @@ const ArtworkForm = () => {
   const handleSelectChange = (e) => {
     const selectedTechnique = e.target.value;
     setForm({ ...form, technique: selectedTechnique, subTechnique: "" });
+    setSubTechniqueVisible(true); // Show the sub-technique input when a new technique is selected
     if (selectedTechnique !== "addNew") {
       setNewTechnique("");
     }
   };
+
   const handleNewTechniqueChange = (e) => {
     setNewTechnique(e.target.value);
   };
@@ -105,6 +108,7 @@ const ArtworkForm = () => {
       setTechniques(updatedTechniques);
       localStorage.setItem("techniques", JSON.stringify(updatedTechniques));
       setNewSubTechnique("");
+      setSubTechniqueVisible(false); // Hide the sub-technique input after adding
     } else {
       alert("Please enter a valid sub-technique name and select a technique.");
     }
@@ -219,90 +223,83 @@ const ArtworkForm = () => {
 
           {/* Technique Field */}
           <label>
-            Technique
-            <select
+        Technique
+        <select
+          className={styles.ArtworkFormInput}
+          name="technique"
+          value={form.technique}
+          onChange={handleSelectChange}
+        >
+          <option value="">Select Technique</option>
+          <option value="addNew">Add New Technique...</option>
+          {Object.keys(techniques).map((technique, index) => (
+            <option key={index} value={technique}>
+              {technique}
+            </option>
+          ))}
+        </select>
+      </label>
+
+      {/* New Technique Input */}
+      {form.technique === "addNew" && (
+        <div>
+          <label>
+            New Technique
+            <input
               className={styles.ArtworkFormInput}
-              name="technique"
-              value={form.technique}
-              onChange={handleSelectChange}
-              required
-            >
-              <option value="">Select Technique</option>
-              {Object.keys(techniques).map((technique, index) => (
-                <option key={index} value={technique}>
-                  {technique}
-                </option>
-              ))}
-              <option value="addNew">Add new technique...</option>
-            </select>
+              type="text"
+              value={newTechnique}
+              onChange={handleNewTechniqueChange}
+              placeholder="Enter new technique"
+            />
+            <button type="button" onClick={handleAddNewTechnique}  className={styles.addNewTechnique}>
+              Add New Technique
+            </button>
           </label>
+        </div>
+      )}
 
-          {/* Add New Technique */}
-          {form.technique === "addNew" && (
-            <div>
-              <label>
-                New Technique Name:
-                <input
-                  className={styles.ArtworkFormInput}
-                  type="text"
-                  value={newTechnique}
-                  onChange={handleNewTechniqueChange}
-                  placeholder="New technique name"
-                  required
-                />
-                <button
-                  type="button"
-                  onClick={handleAddNewTechnique}
-                  className={styles.addNewTechnique}
-                >
-                  Add New Technique
-                </button>
-              </label>
-            </div>
-          )}
+        {/* Sub Technique Field */}
+        {form.technique && subTechniqueVisible && (
+        <div>
+          <label>
+            Sub Technique
+            <input
+              className={styles.ArtworkFormInput}
+              type="text"
+              value={newSubTechnique}
+              onChange={handleNewSubTechniqueChange}
+              placeholder="New sub-technique name"
+            />
+            <button
+              type="button"
+              onClick={handleAddSubTechnique}
+              className={styles.addSubTechnique}
+            >
+              Add Sub Technique
+            </button>
+          </label>
+        </div>
+      )}
 
-          {/* Sub Technique Field */}
-          {form.technique && (
-            <div>
-              <label>
-                Sub Technique
-                <input
-                  className={styles.ArtworkFormInput}
-                  type="text"
-                  value={newSubTechnique}
-                  onChange={handleNewSubTechniqueChange}
-                  placeholder="New sub-technique name"
-                />
-                <button
-                  type="button"
-                  onClick={handleAddSubTechnique}
-                  className={styles.addSubTechnique}
-                >
-                  Add Sub Technique
-                </button>
-              </label>
-            </div>
-          )}
-
-          {/* Sub Technique Dropdown */}
-          {form.technique && (
-            <label>
-              Sub Technique
-              <select
-                className={styles.ArtworkFormInput}
-                name="subTechnique"
-                value={form.subTechnique}
-                onChange={handleChange}
-              >
-                <option value="">Select Sub Technique</option>
-                {techniques[form.technique]?.map((subTechnique, index) => (
-                  <option key={index} value={subTechnique}>
-                    {subTechnique}
-                  </option>
-                ))}
-              </select>
-            </label>
-          )}
+      {/* Sub Technique Dropdown */}
+      {form.technique && (
+        <label>
+          Sub Technique
+          <select
+            className={styles.ArtworkFormInput}
+            name="subTechnique"
+            value={form.subTechnique}
+            onChange={handleChange}
+          >
+            <option value="">Select Sub Technique</option>
+            {techniques[form.technique]?.map((subTechnique, index) => (
+              <option key={index} value={subTechnique}>
+                {subTechnique}
+              </option>
+            ))}
+          </select>
+        </label> )}
 
           {/* Medium Field */}
           {form.medium === "addNew" && (
