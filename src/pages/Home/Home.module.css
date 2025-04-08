@@ -121,4 +121,59 @@
     border: 1px solid darkred; 
 }
 
+/*  */
 
+.pagination {
+    display: flex;
+    justify-content: end;
+    max-width: 1900px;
+    width: 85%;
+    align-items: center;
+    gap: 6px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  
+  .pageBtn {
+    padding: 6px 12px;
+    border: none;
+    background-color: #eee;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .pageBtn:hover {
+    background-color: #ccc;
+  }
+  
+  .activePage {
+    background-color: #333;
+    color: white;
+  }
+  
+  .arrowBtn {
+    padding: 6px 12px;
+    background-color: #ddd;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  
+  .arrowBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .ellipsis {
+    padding: 6px 10px;
+    color: #777;
+  }
+  
+  @media screen and (max-width: 450px) {
+    .pagination {
+        justify-content: center;
+        width: 100%;
+    }
+  }
