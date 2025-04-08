@@ -445,13 +445,13 @@ const ArtworkForm = () => {
               required
             />
           </label>
-          
-        </form>
-        <div className={styles.artworkSubmitBtn}>
+          <div className={styles.artworkSubmitBtn}>
             <button className={styles.submitButton} type="submit" form="artworkForm">
               {id ? "Update" : "Submit"}
             </button>
           </div>
+        </form>
+       
       </div>
     </div>
   );
