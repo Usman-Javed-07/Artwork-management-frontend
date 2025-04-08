@@ -43,7 +43,7 @@ const ArtworkForm = () => {
   const [newMedium, setNewMedium] = useState("");
   const [newTechnique, setNewTechnique] = useState("");
   const [newSubTechnique, setNewSubTechnique] = useState("");
-  const [subTechniqueVisible, setSubTechniqueVisible] = useState(true); // New state for visibility
+  const [subTechniqueVisible, setSubTechniqueVisible] = useState(true); 
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -231,7 +231,7 @@ const ArtworkForm = () => {
           onChange={handleSelectChange}
         >
           <option value="">Select Technique</option>
-          <option value="addNew">Add New Technique...</option>
+          <option value="addNew" className={styles.addOption}>Add New Technique...</option>
           {Object.keys(techniques).map((technique, index) => (
             <option key={index} value={technique}>
               {technique}
@@ -355,7 +355,7 @@ const ArtworkForm = () => {
                   {medium}
                 </option>
               ))}
-              <option value="addNew">Add new medium...</option>
+              <option value="addNew" className={styles.addOption}>Add new medium...</option>
             </select>
           </label>
 
