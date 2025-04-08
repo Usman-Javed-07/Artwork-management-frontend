@@ -2,11 +2,13 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { useAuth } from "../../components/Context/AuthContext";
 import styles from "../Login/Login.module.css";
 import { toast } from 'react-toastify';
 import { FaEye, FaEyeSlash } from "react-icons/fa"; 
 
 export const Login = () => {
+    const { login } = useAuth(); 
     const [formData, setFormData] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
     const [showPassword, setShowPassword] = useState(false); 
@@ -24,10 +26,13 @@ export const Login = () => {
             // Store the token in localStorage for future API calls
             localStorage.setItem("token", response.data.token);
             console.log(response.data.token);
+            login({ token: response.data.token });
             toast.success(response.data.message || "Login successful!");
+            console.log("Token in PrivateRoute:", localStorage.getItem("token"));
 
             // Navigate to the desired page
             navigate("/Home");
+            window.location.reload();
         } catch (err) {
             setError(err.response?.data?.message || "An error occurred during login");
             toast.error("An error occurred during login")

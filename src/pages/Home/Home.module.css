@@ -5,6 +5,9 @@
     padding: 15px;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
+    gap: 30px
+    ;
 }
 .addArtwork {
     text-decoration: none;

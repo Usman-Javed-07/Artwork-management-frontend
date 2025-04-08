@@ -3,6 +3,8 @@ import { getArtworks, deleteArtwork } from "../../services/artworkService";
 import { Link } from "react-router-dom";
 import styles from "../Home/Home.module.css";
 import { toast } from 'react-toastify';
+import { useAuth } from "../../components/Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa"; 
 
 const ITEMS_PER_PAGE = 8;
@@ -10,6 +12,14 @@ const ITEMS_PER_PAGE = 8;
 const Home = () => {
   const [artworks, setArtworks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(); 
+    toast.success("Logged out successfully!");
+    navigate("/"); 
+  };
 
   useEffect(() => {
     loadArtworks();
@@ -106,12 +116,12 @@ const Home = () => {
   
   return (
    <>
-       
-   
-    
     <div className={styles.homeContainer}>
       <nav className={styles.navArt}>
         <Link className={styles.addArtwork} to="/ArtworkList">Add New Artwork</Link>
+        <div>
+        <a href="#" onClick={handleLogout} className={styles.addArtwork}>Logout</a>
+       </div>
       </nav>
 
       <div className={styles.artworkGrid}>
