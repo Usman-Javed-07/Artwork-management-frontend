@@ -1,15 +1,29 @@
 .detailsPage {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 100px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 10px;
+    justify-self: center;
+    gap: 50px;
+    background: linear-gradient(180deg, #ffffff, #9999994f);
     padding: 50px;
+    border-radius: 10px;
+    margin-top: 30px;
 }
 .artworkDetailImg img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    aspect-ratio: 6 / 7; 
+    height: auto;    
     object-fit: cover;
     display: block;
+}
+p , h1 , h2 {
+    margin:1px;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 500;
+    color: #000000b2;
+    padding: 5px;
+}
+h2 , strong{
+    color: #000000b2;
 }
