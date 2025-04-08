@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "../ArtworkDetailPage/ArtworkDetailPage.module.css";
 import { FaArrowLeft } from 'react-icons/fa';
 import { Link } from "react-router-dom";
+import html2pdf from 'html2pdf.js';
 
 import { AiOutlinePrinter } from 'react-icons/ai';
 const ArtworkDetails = () => {
@@ -25,6 +26,12 @@ const ArtworkDetails = () => {
     navigate("/home"); 
   };
 
+  const handlePrintAndDownload = () => {
+    const element = document.getElementById('printable-area');
+    html2pdf().from(element).save('page-data.pdf');
+    window.print();
+  };
+  
   return (
    <>
     <nav className={styles.artworkList}>
@@ -35,6 +42,7 @@ const ArtworkDetails = () => {
    <div className={styles.backArrow}>
    <FaArrowLeft  className={styles.arrowLeft} onClick={handleGoBack}/>
    </div>
+   <div id="printable-area">
    <div className={styles.detailForm}>
     <div className={styles.detailsPage}>
       <div className={styles.artworkDetailImg}>
@@ -45,7 +53,8 @@ const ArtworkDetails = () => {
         />
       </div>
       <div className={styles.artworkDetailList}>
-      <AiOutlinePrinter className={styles.printBtn}/> 
+      <AiOutlinePrinter className={styles.printBtn} onClick={handlePrintAndDownload} />
+
         <h1>{artwork.title}</h1>     
           <h2>{artwork.artist}</h2>
         <strong>{artwork.year}</strong>
@@ -59,6 +68,7 @@ const ArtworkDetails = () => {
         <p>{artwork.exhibitionList}</p>
         <p>{artwork.extraInformation}</p>
         
+      </div>
       </div>
     </div>
     </div>
