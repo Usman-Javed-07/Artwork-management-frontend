@@ -45,7 +45,7 @@ const ArtworkDetails = () => {
         />
       </div>
       <div className={styles.artworkDetailList}>
-      {/* <AiOutlinePrinter style={{ marginLeft: '508px' }} />  */}
+      <AiOutlinePrinter className={styles.printBtn}/> 
         <h1>{artwork.title}</h1>     
           <h2>{artwork.artist}</h2>
         <strong>{artwork.year}</strong>

@@ -111,3 +111,8 @@ strong {
   background-size: 100% 100%;
   background-position-x: left;
 }
+.printBtn {
+    font-size: 30px;
+    margin-left: 450px;
+    cursor: pointer;
+}
