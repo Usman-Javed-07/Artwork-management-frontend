@@ -1,29 +1,113 @@
-.detailsPage {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    padding: 10px;
-    justify-self: center;
-    gap: 50px;
-    background: linear-gradient(180deg, #ffffff, #9999994f);
-    padding: 50px;
-    border-radius: 10px;
-    margin-top: 30px;
-}
-.artworkDetailImg img {
-    height: auto;    
-    object-fit: cover;
-    display: block;
-}
-p , h1 , h2 {
-    margin:1px;
+p,
+h1,
+h2 {
+  margin: 1px;
 }
 
 p {
-    font-size: 16px;
-    font-weight: 500;
-    color: #000000b2;
-    padding: 5px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #000000b2;
+  padding: 5px;
 }
-h2 , strong{
+h2,
+strong {
+  color: #000000b2;
+}
+
+
+.detailsPage {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 10px;
+  justify-self: center;
+  gap: 50px;
+  background: linear-gradient(180deg, #ffffff, #9999994f);
+  padding: 50px;
+  border-radius: 10px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.backArrow {
+    font-size: 20px;
+    display: flex;
+    margin-top: 30px;
+    cursor: pointer;
     color: #000000b2;
+    margin-left: 100px;
+  }
+  .arrowLeft:hover {
+    transform: scale(1.2);
+    color: red;
+  }
+@media screen and (max-width: 1024px) {
+  .detailsPage {
+    grid-template-columns: repeat(1, 1fr);
+    /* text-align: center; */
+  }
+}
+.artworkDetailImg img {
+  width: 600px;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  object-fit: cover;
+}
+@media screen and (max-width: 768px) {
+  .artworkDetailImg img {
+    width: 500px;
+    height: 300px;
+  }
+}
+@media screen and (max-width: 425px) {
+    .artworkDetailImg img {
+      width: 300px;
+      height: 150px;
+    }
+    .backArrow{ 
+        margin-left: 40px;
+        font-size: 16px;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    .artworkDetailImg img {
+      width: 200px;
+      height: 120px;
+    }
+    p {
+        font-size: 10px;
+    }
+    h1 {
+        font-size: 10px;
+    }
+    h2 ,strong {
+        font-size: 10px;
+    }
+ 
+  }
+
+
+
+/* test */
+
+.artworkList {
+  background: #021938f4;
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+.goHome {
+  text-decoration: none;
+  border: 1px solid #fff;
+  padding: 5px 20px;
+  color: #fff;
+  background-image: linear-gradient(blue, blue);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  background-position-x: right;
+  transition: background-size 500ms;
+}
+.goHome:hover {
+  background-size: 100% 100%;
+  background-position-x: left;
 }

@@ -58,7 +58,6 @@
 }
 .artworkSubmitBtn {
     padding: 30px;
-    margin-bottom: 30px;
     display: flex;
    justify-content: center;
    grid-column: span 2; 

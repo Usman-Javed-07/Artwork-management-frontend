@@ -1,9 +1,15 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import styles from "../ArtworkDetailPage/ArtworkDetailPage.module.css";
+import { FaArrowLeft } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 
+import { AiOutlinePrinter } from 'react-icons/ai';
 const ArtworkDetails = () => {
+
+  const navigate = useNavigate(); 
   const { id } = useParams();
   const [artwork, setArtwork] = useState(null);
 
@@ -15,17 +21,31 @@ const ArtworkDetails = () => {
   }, [id]);
 
   if (!artwork) return <p>Loading...</p>;
+  const handleGoBack = () => {
+    navigate("/home"); 
+  };
 
   return (
+   <>
+    <nav className={styles.artworkList}>
+        <Link to="/Home" className={styles.goHome}>
+          Home
+        </Link>
+      </nav>
+   <div className={styles.backArrow}>
+   <FaArrowLeft  className={styles.arrowLeft} onClick={handleGoBack}/>
+   </div>
+   <div className={styles.detailForm}>
     <div className={styles.detailsPage}>
       <div className={styles.artworkDetailImg}>
         <img
           src={`http://localhost:5000${artwork.pictureUrl}`}
           alt={artwork.title}
-          style={{ width: '600px', height: '400px' }}
+          // style={{ width: '600px', height: '400px' }}
         />
       </div>
       <div className={styles.artworkDetailList}>
+      {/* <AiOutlinePrinter style={{ marginLeft: '508px' }} />  */}
         <h1>{artwork.title}</h1>     
           <h2>{artwork.artist}</h2>
         <strong>{artwork.year}</strong>
@@ -41,6 +61,8 @@ const ArtworkDetails = () => {
         
       </div>
     </div>
+    </div>
+    </>
   );
 };
 
