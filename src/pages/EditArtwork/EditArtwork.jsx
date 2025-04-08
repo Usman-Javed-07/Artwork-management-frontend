@@ -25,6 +25,7 @@ const EditArtwork = () => {
 
   useEffect(() => {
     fetchArtwork();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchArtwork = async () => {
@@ -123,12 +124,13 @@ const EditArtwork = () => {
             required
           />
         </div>
-      </form>
-      <div className={styles.artworkSubmitBtn}>
+        <div className={styles.artworkSubmitBtn}>
       <button className={styles.submitButton} type="submit"  form="editArtwork">
           Update Artwork
         </button>
       </div>
+      </form>
+      
       
     </div>
   );

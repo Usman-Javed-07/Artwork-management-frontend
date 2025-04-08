@@ -205,6 +205,7 @@ const ArtworkForm = () => {
             Dimensions (select between cm or mm)
             <select
               className={styles.ArtworkFormInput}
+              
               name="dimensions"
               value={form.dimensions}
               onChange={handleChange}

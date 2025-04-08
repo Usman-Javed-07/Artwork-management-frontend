@@ -47,6 +47,7 @@
     background: linear-gradient(180deg, #ffffff, #9999994f);
     padding: 70px;
     border-radius: 40px;
+    margin-bottom: 40px;
 }
 
 .artworkFormGroup {
@@ -76,8 +77,21 @@
     border: 1px solid #0d4998;
     transition: all 0.3s ease;
 }
+.artworkSubmitBtn {
+    padding: 30px;
+    margin-bottom: 30px;
+    display: flex;
+   justify-content: center;
+   grid-column: span 2; 
+   text-align: center;
+}
+@media screen and (max-width: 768px) {
+    .artworkSubmitBtn {
+        grid-column: span 1; 
+    }
+}
 .submitButton {
-    width: 60%;
+    width: 100%;
     text-decoration: none;
     border: 1px solid #fff;
     padding: 10px 100px; 
@@ -109,4 +123,54 @@
     margin-bottom: 30px;
     display: flex;
    justify-content: center;
+}
+
+
+@media screen and (max-width:1024px) {
+    .artworkListForm  {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 700px;
+    }
+}
+@media screen and (max-width:768px) {
+    .artworkListForm  {
+        grid-template-columns: repeat(1, 1fr)!important;
+        max-width: 500px;
+        gap: 10px;
+    }
+    .artworkHeading {      
+        font-size: 14px;
+        max-width: 220px;
+        margin-bottom: 5px;
+    }
+}
+@media screen and (max-width:475px) {
+    .artworkListForm  {
+        max-width: 220px;
+        padding: 10px 70px;
+        
+    }
+    .submitButton {
+        font-size: 12px;
+        padding: 10px;
+    }
+}
+@media screen and (max-width:325px) {
+    .artworkListForm  {
+        max-width: 100px;
+        padding: 10px 70px;
+        
+    }
+    .ArtworkFormInput{
+        max-width: 200px;
+        margin:  0 auto;
+    }
+    label {
+        text-align: start;
+        font-size: 13px;
+    }
+    .submitButton {
+        padding: 5px 30px;
+        font-size: 12px;
+    }
 }

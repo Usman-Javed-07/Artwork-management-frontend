@@ -49,31 +49,7 @@
     border-radius: 40px;
     margin-bottom: 30px;
 }
-@media screen and (max-width:1024px) {
-    .artworkListForm  {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 700px;
-    }
-}
-@media screen and (max-width:768px) {
-    .artworkListForm  {
-        grid-template-columns: repeat(1, 1fr)!important;
-        max-width: 600px;
-        gap: 10px;
-    }
-    .artworkHeading {      
-        font-size: 14px;
-        max-width: 220px;
-        margin-bottom: 5px;
-    }
-}
-@media screen and (max-width:375px) {
-    .artworkListForm  {
-        max-width: 220px;
-        padding: 10px 70px;
-        
-    }
-}
+
 .ArtworkFormInput {
     padding: 15px;
     border-radius: 5px;
@@ -172,4 +148,50 @@
 .addSubTechnique:hover{
     background-size: 100% 100%;
     background-position-x: left;
+}
+
+
+@media screen and (max-width:1024px) {
+    .artworkListForm  {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 700px;
+    }
+}
+@media screen and (max-width:768px) {
+    .artworkListForm  {
+        grid-template-columns: repeat(1, 1fr)!important;
+        max-width: 500px;
+        gap: 10px;
+    }
+    .artworkHeading {      
+        font-size: 14px;
+        max-width: 220px;
+        margin-bottom: 5px;
+    }
+}
+@media screen and (max-width:475px) {
+    .artworkListForm  {
+        max-width: 220px;
+        padding: 10px 70px;
+        
+    }
+}
+@media screen and (max-width:325px) {
+    .artworkListForm  {
+        max-width: 100px;
+        padding: 10px 70px;
+        
+    }
+    .ArtworkFormInput{
+        max-width: 200px;
+        margin:  0 auto;
+    }
+    label {
+        text-align: start;
+        font-size: 13px;
+    }
+    .submitButton {
+        padding: 5px 30px;
+        font-size: 12px;
+    }
 }
