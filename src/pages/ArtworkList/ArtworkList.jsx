@@ -20,15 +20,18 @@ const ArtworkForm = () => {
     exhibitionList: "",
     extraInformation: "",
     invoice: null,
+    additionalPictures: [],
   });
 
   const [file, setFile] = useState(null);
   const [techniques, setTechniques] = useState(() => {
     const storedTechniques = JSON.parse(localStorage.getItem("techniques"));
-    return storedTechniques || {
-      painting: ["oil", "tempera", "gouache"],
-      sculpture: ["marble", "bronze"],
-    };
+    return (
+      storedTechniques || {
+        painting: ["oil", "tempera", "gouache"],
+        sculpture: ["marble", "bronze"],
+      }
+    );
   });
 
   const [mediums, setMediums] = useState(() => {
@@ -36,9 +39,10 @@ const ArtworkForm = () => {
     return stored ? JSON.parse(stored) : [];
   });
 
+  const [additionalPictures, setAdditionalPictures] = useState([]);
   const [newMedium, setNewMedium] = useState("");
-  const [newTechnique, setNewTechnique] = useState(""); 
-  const [newSubTechnique, setNewSubTechnique] = useState(""); 
+  const [newTechnique, setNewTechnique] = useState("");
+  const [newSubTechnique, setNewSubTechnique] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -60,22 +64,25 @@ const ArtworkForm = () => {
     const selectedTechnique = e.target.value;
     setForm({ ...form, technique: selectedTechnique, subTechnique: "" });
     if (selectedTechnique !== "addNew") {
-      setNewTechnique(""); 
+      setNewTechnique("");
     }
   };
   const handleNewTechniqueChange = (e) => {
-    setNewTechnique(e.target.value); 
+    setNewTechnique(e.target.value);
   };
 
   const handleAddNewTechnique = () => {
     const trimmedTechnique = newTechnique.trim();
-    if (trimmedTechnique && !techniques.hasOwnProperty.call(techniques, trimmedTechnique)) {
+    if (
+      trimmedTechnique &&
+      !techniques.hasOwnProperty.call(techniques, trimmedTechnique)
+    ) {
       setTechniques((prevTechniques) => {
         const updatedTechniques = {
           ...prevTechniques,
           [trimmedTechnique]: [],
         };
-        localStorage.setItem("techniques", JSON.stringify(updatedTechniques)); 
+        localStorage.setItem("techniques", JSON.stringify(updatedTechniques));
         return updatedTechniques;
       });
       setForm({ ...form, technique: trimmedTechnique, subTechnique: "" });
@@ -94,36 +101,43 @@ const ArtworkForm = () => {
     if (trimmedSubTechnique && form.technique) {
       const updatedTechniques = { ...techniques };
       updatedTechniques[form.technique].push(trimmedSubTechnique);
-  
+
       setTechniques(updatedTechniques);
-      localStorage.setItem("techniques", JSON.stringify(updatedTechniques)); 
-      setNewSubTechnique(""); 
+      localStorage.setItem("techniques", JSON.stringify(updatedTechniques));
+      setNewSubTechnique("");
     } else {
       alert("Please enter a valid sub-technique name and select a technique.");
     }
   };
-  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const formData = new FormData();
-    Object.keys(form).forEach((key) => formData.append(key, form[key]));
+    Object.keys(form).forEach((key) => {
+      if (key !== "invoice") {
+        formData.append(key, form[key]);
+      }
+    });
+
     if (file) formData.append("picture", file);
-  
+    if (form.invoice) formData.append("invoice", form.invoice);
+
+    // Append additional pictures
+    additionalPictures.forEach((file) => {
+      formData.append("additionalPictures", file);
+    });
+
     try {
-      const response = await axios.post("http://localhost:5000/api/artworks", formData);
+      const response = await axios.post(
+        "http://localhost:5000/api/artworks",
+        formData
+      );
       console.log("Artwork submitted:", response.data);
       navigate("/Home");
     } catch (error) {
       console.error("Error submitting artwork:", error);
     }
-    if (!mediums.includes(form.medium)) {
-      const updated = [...mediums, form.medium];
-      setMediums(updated);
-      localStorage.setItem("mediums", JSON.stringify(updated));
-    }
-    
   };
 
   return (
@@ -230,12 +244,16 @@ const ArtworkForm = () => {
                 <input
                   className={styles.ArtworkFormInput}
                   type="text"
-                  value={newTechnique} 
-                  onChange={handleNewTechniqueChange} 
+                  value={newTechnique}
+                  onChange={handleNewTechniqueChange}
                   placeholder="New technique name"
                   required
                 />
-                <button type="button" onClick={handleAddNewTechnique} className={styles.addNewTechnique}>
+                <button
+                  type="button"
+                  onClick={handleAddNewTechnique}
+                  className={styles.addNewTechnique}
+                >
                   Add New Technique
                 </button>
               </label>
@@ -254,7 +272,11 @@ const ArtworkForm = () => {
                   onChange={handleNewSubTechniqueChange}
                   placeholder="New sub-technique name"
                 />
-                <button type="button" onClick={handleAddSubTechnique} className={styles.addSubTechnique}>
+                <button
+                  type="button"
+                  onClick={handleAddSubTechnique}
+                  className={styles.addSubTechnique}
+                >
                   Add Sub Technique
                 </button>
               </label>
@@ -283,62 +305,61 @@ const ArtworkForm = () => {
 
           {/* Medium Field */}
           {form.medium === "addNew" && (
-  <label>
-    New Medium Name
-    <input
-      className={styles.ArtworkFormInput}
-      type="text"
-      value={newMedium}
-      onChange={(e) => setNewMedium(e.target.value)}
-      placeholder="Enter new medium"
-      required
-    />
-    <button
-      type="button"
-      onClick={() => {
-        const trimmed = newMedium.trim();
-        if (trimmed && !mediums.includes(trimmed)) {
-          const updated = [...mediums, trimmed];
-          setMediums(updated);
-          localStorage.setItem("mediums", JSON.stringify(updated));
-          setForm({ ...form, medium: trimmed });
-          setNewMedium("");
-        } else {
-          alert("Please enter a unique and valid medium name");
-        }
-      }}
-      className={styles.addSubTechnique}
-    >
-      Add New Medium
-    </button>
-  </label>
-)}
+            <label>
+              New Medium Name
+              <input
+                className={styles.ArtworkFormInput}
+                type="text"
+                value={newMedium}
+                onChange={(e) => setNewMedium(e.target.value)}
+                placeholder="Enter new medium"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  const trimmed = newMedium.trim();
+                  if (trimmed && !mediums.includes(trimmed)) {
+                    const updated = [...mediums, trimmed];
+                    setMediums(updated);
+                    localStorage.setItem("mediums", JSON.stringify(updated));
+                    setForm({ ...form, medium: trimmed });
+                    setNewMedium("");
+                  } else {
+                    alert("Please enter a unique and valid medium name");
+                  }
+                }}
+                className={styles.addSubTechnique}
+              >
+                Add New Medium
+              </button>
+            </label>
+          )}
 
           <label>
-  Medium
-  <select
-    className={styles.ArtworkFormInput}
-    name="medium"
-    value={form.medium}
-    onChange={(e) => {
-      const selected = e.target.value;
-      setForm({ ...form, medium: selected });
-      if (selected !== "addNew") {
-        setNewMedium("");
-      }
-    }}
-    required
-  >
-    <option value="">Select Medium</option>
-    {mediums.map((medium, index) => (
-      <option key={index} value={medium}>
-        {medium}
-      </option>
-    ))}
-    <option value="addNew">Add new medium...</option>
-  </select>
-</label>
-
+            Medium
+            <select
+              className={styles.ArtworkFormInput}
+              name="medium"
+              value={form.medium}
+              onChange={(e) => {
+                const selected = e.target.value;
+                setForm({ ...form, medium: selected });
+                if (selected !== "addNew") {
+                  setNewMedium("");
+                }
+              }}
+              required
+            >
+              <option value="">Select Medium</option>
+              {mediums.map((medium, index) => (
+                <option key={index} value={medium}>
+                  {medium}
+                </option>
+              ))}
+              <option value="addNew">Add new medium...</option>
+            </select>
+          </label>
 
           {/* Other Fields */}
           <label>
@@ -378,50 +399,50 @@ const ArtworkForm = () => {
             ></textarea>
           </label>
           <label>
-    Literature List
-    <textarea
-      className={styles.ArtworkFormInput}
-      name="literatureList"
-      value={form.literatureList}
-      onChange={handleChange}
-      placeholder="Literature List"
-    ></textarea>
-  </label>
+            Literature List
+            <textarea
+              className={styles.ArtworkFormInput}
+              name="literatureList"
+              value={form.literatureList}
+              onChange={handleChange}
+              placeholder="Literature List"
+            ></textarea>
+          </label>
 
-  <label>
-    Exhibition List
-    <textarea
-      className={styles.ArtworkFormInput}
-      name="exhibitionList"
-      value={form.exhibitionList}
-      onChange={handleChange}
-      placeholder="Exhibition List"
-    ></textarea>
-  </label>
+          <label>
+            Exhibition List
+            <textarea
+              className={styles.ArtworkFormInput}
+              name="exhibitionList"
+              value={form.exhibitionList}
+              onChange={handleChange}
+              placeholder="Exhibition List"
+            ></textarea>
+          </label>
 
-  <label>
-    Extra Information
-    <textarea
-      className={styles.ArtworkFormInput}
-      name="extraInformation"
-      value={form.extraInformation}
-      onChange={handleChange}
-      placeholder="Extra Information"
-    ></textarea>
-  </label>
-  <label>
-  Invoice (Upload as picture or file)
-  <input
-    className={styles.ArtworkFormInput}
-    type="file"
-    name="invoice"
-    accept="image/*,.pdf"
-    onChange={(e) => setForm({ ...form, invoice: e.target.files[0] })}
-    required 
-  />
-</label>
+          <label>
+            Extra Information
+            <textarea
+              className={styles.ArtworkFormInput}
+              name="extraInformation"
+              value={form.extraInformation}
+              onChange={handleChange}
+              placeholder="Extra Information"
+            ></textarea>
+          </label>
+          <label>
+            Invoice (Upload as picture or file)
+            <input
+              className={styles.ArtworkFormInput}
+              type="file"
+              name="invoice"
+              accept="image/*,.pdf"
+              onChange={(e) => setForm({ ...form, invoice: e.target.files[0] })}
+              required
+            />
+          </label>
 
-{/* {form.invoice && (
+          {/* {form.invoice && (
   <div>
     <p>Uploaded File: {form.invoice.name}</p>
     {form.invoice.type.startsWith("image/") && (
@@ -434,7 +455,6 @@ const ArtworkForm = () => {
   </div>
 )} */}
 
-
           {/* Upload Image Field */}
           <label>
             Upload Image
@@ -445,13 +465,30 @@ const ArtworkForm = () => {
               required
             />
           </label>
+
+          <label>
+            Upload Additional Pictures (Optional)
+            <input
+              className={styles.ArtworkFormInput} 
+              type="file"
+              name="additionalPictures"
+              multiple
+              onChange={(e) =>
+                setAdditionalPictures(Array.from(e.target.files))
+              }
+            />
+          </label>
+
           <div className={styles.artworkSubmitBtn}>
-            <button className={styles.submitButton} type="submit" form="artworkForm">
+            <button
+              className={styles.submitButton}
+              type="submit"
+              form="artworkForm"
+            >
               {id ? "Update" : "Submit"}
             </button>
           </div>
         </form>
-       
       </div>
     </div>
   );
