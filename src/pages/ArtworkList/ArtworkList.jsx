@@ -5,6 +5,9 @@ import axios from "axios";
 import styles from "../ArtworkList/ArtworkList.module.css";
 
 const ArtworkForm = () => {
+  const [dimensionValue, setDimensionValue] = useState('');
+  const [dimensionUnit, setDimensionUnit] = useState('');
+
   const [form, setForm] = useState({
     artist: "",
     title: "",
@@ -56,7 +59,16 @@ const ArtworkForm = () => {
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
+  const handleDimensionChange = (value, unit) => {
+    setDimensionValue(value);
+    setDimensionUnit(unit);
+  
+    if (value && unit) {
+      const combined = `${value} ${unit}`;
+      setForm({ ...form, dimensions: combined });
+    }
+  };
+  
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
   };
@@ -206,20 +218,29 @@ const ArtworkForm = () => {
 
           {/* Dimensions Field */}
           <label>
-            Dimensions (select between cm or mm)
-            <select
-              className={styles.ArtworkFormInput}
-              
-              name="dimensions"
-              value={form.dimensions}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Select unit</option>
-              <option value="cm">Centimeters (cm)</option>
-              <option value="mm">Millimeters (mm)</option>
-            </select>
-          </label>
+  Dimensions (select between cm or mm)
+  <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+    <input
+      type="number"
+      className={styles.ArtworkFormInput}
+      value={dimensionValue}
+      onChange={(e) => handleDimensionChange(e.target.value, dimensionUnit)}
+      placeholder="Enter value"
+      required
+    />
+    <select
+      className={styles.ArtworkFormInput}
+      value={dimensionUnit}
+      onChange={(e) => handleDimensionChange(dimensionValue, e.target.value)}
+      required
+    >
+      <option value="">Select unit</option>
+      <option value="cm">Centimeters (cm)</option>
+      <option value="mm">Millimeters (mm)</option>
+    </select>
+  </div>
+</label>
+
 
           {/* Technique Field */}
           <label>

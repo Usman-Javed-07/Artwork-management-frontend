@@ -90,6 +90,7 @@ const ArtworkDetails = () => {
               <h2>{artwork.artist}</h2>
               <strong>{artwork.year}</strong>
               <p>{artwork.technique}</p>
+              <p>{artwork.dimensions}</p>
               <p>{artwork.subTechnique}</p>
               <p>{artwork.medium}</p>
               <p>{artwork.numberOfEditions}</p>
