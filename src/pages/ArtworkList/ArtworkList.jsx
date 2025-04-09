@@ -71,6 +71,19 @@ const ArtworkForm = () => {
       newErrors.medium = "Medium is required.";
     if (!form.invoice)
       newErrors.invoice = "Invoice file is required.";
+    if (!form.numberOfEditions)
+      newErrors.numberOfEditions = "Number Of editions is required.";
+    if (!form.editionNumber)
+      newErrors.editionNumber = "Edition number is required.";
+    if (!form.provenance)
+      newErrors.provenance = "Provenance is required.";
+    if (!form.exhibitionList)
+      newErrors.exhibitionList = "Exhibition list is required.";
+    if (!form.literatureList)
+      newErrors.literatureList = "Literature list is required.";
+    
+    
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
