@@ -22,6 +22,7 @@ const Home = () => {
     year: "",
     technique: "",
     dimensions: "",
+    medium: "",
   });
 
   const [isAdvancedSearchVisible, setIsAdvancedSearchVisible] = useState(false);
@@ -71,7 +72,10 @@ const Home = () => {
         .includes(advancedFilters.technique.toLowerCase()) &&
       artwork.dimensions
         ?.toLowerCase()
-        .includes(advancedFilters.dimensions.toLowerCase())
+        .includes(advancedFilters.dimensions.toLowerCase()) &&
+        artwork.medium
+        ?.toLowerCase()
+        .includes(advancedFilters.medium.toLowerCase())
     );
   };
 
@@ -247,6 +251,20 @@ const Home = () => {
                 setAdvancedFilters({
                   ...advancedFilters,
                   dimensions: e.target.value,
+                })
+              }
+            />
+          </div>
+          <div>
+            <label>Medium:</label>
+            <input
+              className={styles.ArtworkFormInput}
+              type="text"
+              value={advancedFilters.medium}
+              onChange={(e) =>
+                setAdvancedFilters({
+                  ...advancedFilters,
+                  medium: e.target.value,
                 })
               }
             />
