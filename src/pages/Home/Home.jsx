@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { getArtworks, deleteArtwork } from "../../services/artworkService";
 import { getArtworks} from "../../services/artworkService";
 import { Link } from "react-router-dom";
 import styles from "../Home/Home.module.css";
@@ -30,32 +29,6 @@ const Home = () => {
     const data = await getArtworks();
     setArtworks(data);
   };
-
-  // const handleDelete = (id) => {
-  //   toast.info(
-  //     <div>
-  //       <p>Are you sure you want to delete this artwork?</p>
-  //       <button onClick={() => confirmDelete(id)} style={{ marginRight: "10px" }}>
-  //         Yes
-  //       </button>
-  //       <button onClick={cancelDelete}>No</button>
-  //     </div>,
-  //     { autoClose: false, closeOnClick: false }
-  //   );
-  // };
-
-  // const confirmDelete = async (id) => {
-  //   if (!id) return;
-  //   await deleteArtwork(id);
-  //   toast.dismiss();
-  //   toast.success("Artwork deleted successfully!");
-  //   loadArtworks();
-  // };
-
-  // const cancelDelete = () => {
-  //   toast.dismiss();
-  // };
-
   const totalPages = Math.ceil(artworks.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const currentArtworks = artworks.slice(startIndex, startIndex + ITEMS_PER_PAGE);
@@ -134,12 +107,6 @@ const Home = () => {
             <div className={styles.artworkInfo}>
               <p>{art.title}</p>
               <p>{art.artist} - {art.year}</p>
-              
-              {/* <div className={styles.artworkBtn}>
-                <Link className={styles.editBtn} to={`/edit/${art.id}`}>Edit</Link>
-                <button className={styles.deleteBtn} onClick={() => handleDelete(art.id)}>Delete</button>
-              </div> */}
-
             </div>
           </div>
           </Link>
