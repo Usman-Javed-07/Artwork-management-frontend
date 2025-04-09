@@ -153,6 +153,7 @@ const Home = () => {
         </nav>
 
         {/* Search Input */}
+        <div className={styles.searchArtwork}>
         <div className={styles.searchContainer}>
           <div className={styles.inputWrapper}>
             <input
@@ -175,6 +176,7 @@ const Home = () => {
             ? "Hide Filter Search - "
             : "Show Filter Search + "}
         </button>
+        </div>
 
         {/* New Advanced Search Filters */}
         <div
