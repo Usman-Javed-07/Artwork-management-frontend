@@ -169,6 +169,7 @@ const ArtworkForm = () => {
       </h2>
 
       <div className={styles.artwrokForm}>
+
         <form
           onSubmit={handleSubmit}
           className={styles.artworkListForm}
@@ -398,7 +399,7 @@ const ArtworkForm = () => {
             Edition Number
             <input
               className={styles.ArtworkFormInput}
-              type="number"
+              type="text"
               name="editionNumber"
               value={form.editionNumber}
               onChange={handleChange}
@@ -461,19 +462,6 @@ const ArtworkForm = () => {
             />
           </label>
 
-          {/* {form.invoice && (
-  <div>
-    <p>Uploaded File: {form.invoice.name}</p>
-    {form.invoice.type.startsWith("image/") && (
-      <img
-        src={URL.createObjectURL(form.invoice)}
-        alt="Invoice Preview"
-        style={{ maxWidth: "200px", marginTop: "10px" }}
-      />
-    )}
-  </div>
-)} */}
-
           {/* Upload Image Field */}
           <label>
             Upload Image
@@ -508,6 +496,7 @@ const ArtworkForm = () => {
             </button>
           </div>
         </form>
+        
       </div>
     </div>
   );
