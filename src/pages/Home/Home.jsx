@@ -16,6 +16,15 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState(""); 
   const { logout } = useAuth();
   const navigate = useNavigate();
+  const [advancedFilters, setAdvancedFilters] = useState({
+    title: "",
+    artist: "",
+    year: "",
+    technique: "",
+    dimensions: "",
+  });
+
+  const [isAdvancedSearchVisible, setIsAdvancedSearchVisible] = useState(false);
 
   const handleLogout = () => {
     logout(); 
@@ -27,6 +36,10 @@ const Home = () => {
     loadArtworks();
   }, []);
 
+  useEffect(() => {
+    setCurrentPage(1); // Reset to first page when filters change
+  }, [searchQuery, advancedFilters]);
+
   const loadArtworks = async () => {
     const data = await getArtworks();
     setArtworks(data);
@@ -34,7 +47,7 @@ const Home = () => {
 
   const totalPages = Math.ceil(artworks.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  
+
   // Filter artworks based on search query
   const filteredArtworks = artworks.filter(artwork => 
     artwork.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -42,7 +55,18 @@ const Home = () => {
     artwork.year.toString().includes(searchQuery) 
   );
 
-  const currentArtworks = filteredArtworks.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  // Apply advanced filter logic
+  const applyAdvancedFilters = (artwork) => {
+    return (
+      artwork.title.toLowerCase().includes(advancedFilters.title.toLowerCase()) &&
+      artwork.artist.toLowerCase().includes(advancedFilters.artist.toLowerCase()) &&
+      artwork.year.toString().includes(advancedFilters.year) &&
+      artwork.technique?.toLowerCase().includes(advancedFilters.technique.toLowerCase()) &&
+      artwork.dimensions?.toLowerCase().includes(advancedFilters.dimensions.toLowerCase())
+    );
+  };
+
+  const currentArtworks = filteredArtworks.filter(applyAdvancedFilters).slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -97,6 +121,10 @@ const Home = () => {
     });
   };
 
+  const toggleAdvancedSearch = () => {
+    setIsAdvancedSearchVisible(!isAdvancedSearchVisible);
+  };
+
   return (
     <>
       <div className={styles.homeContainer}>
@@ -108,22 +136,71 @@ const Home = () => {
         </nav>
 
         {/* Search Input */}
-      
+        <div className={styles.searchContainer}>
+          <div className={styles.inputWrapper}>
+            <input
+              type="text"
+              placeholder="Search artworks..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className={styles.searchInput}
+            />
+            <FaSearch className={styles.searchIcon} />
+          </div>
+        </div>
 
-<div className={styles.searchContainer}>
-  <div className={styles.inputWrapper}>
-    <input
-      type="text"
-      placeholder="Search artworks..."
-      value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
-      className={styles.searchInput}
-    />
-    <FaSearch className={styles.searchIcon} />
-  </div>
-</div>
+        {/* Advanced Search Toggle */}
+        <button onClick={toggleAdvancedSearch} className={styles.advancedSearchToggle}>
+          {isAdvancedSearchVisible ? "Hide Filter Search" : "Show Filter Search"}
+        </button>
 
+        {/* New Advanced Search Filters */}
+        {isAdvancedSearchVisible && (
+          <div className={styles.advancedSearchContainer}>
+            <div>
+              <label>Title:</label>
+              <input
+                type="text"
+                value={advancedFilters.title}
+                onChange={(e) => setAdvancedFilters({ ...advancedFilters, title: e.target.value })}
+              />
+            </div>
+            <div>
+              <label>Artist:</label>
+              <input
+                type="text"
+                value={advancedFilters.artist}
+                onChange={(e) => setAdvancedFilters({ ...advancedFilters, artist: e.target.value })}
+              />
+            </div>
+            <div>
+              <label>Year:</label>
+              <input
+                type="number"
+                value={advancedFilters.year}
+                onChange={(e) => setAdvancedFilters({ ...advancedFilters, year: e.target.value })}
+              />
+            </div>
+            <div>
+              <label>Technique:</label>
+              <input
+                type="text"
+                value={advancedFilters.technique}
+                onChange={(e) => setAdvancedFilters({ ...advancedFilters, technique: e.target.value })}
+              />
+            </div>
+            <div>
+              <label>Dimensions:</label>
+              <input
+                type="text"
+                value={advancedFilters.dimensions}
+                onChange={(e) => setAdvancedFilters({ ...advancedFilters, dimensions: e.target.value })}
+              />
+            </div>
+          </div>
+        )}
 
+        {/* Display Artworks */}
         <div className={styles.artworkGrid}>
           {currentArtworks.map((art) => (
             <Link to={`/ArtworkDetail/${art.id}`} className={styles.goToDetailPage} key={art.id}>
@@ -138,7 +215,7 @@ const Home = () => {
           ))}
         </div>
 
-        {/* Modern Pagination */}
+        {/* Pagination */}
         <div className={styles.pagination}>
           <button
             onClick={() => handlePageChange(currentPage - 1)}
