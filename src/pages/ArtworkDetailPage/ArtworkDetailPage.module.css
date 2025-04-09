@@ -40,51 +40,6 @@ strong {
     transform: scale(1.2);
     color: red;
   }
-@media screen and (max-width: 1024px) {
-  .detailsPage {
-    grid-template-columns: repeat(1, 1fr);
-    /* text-align: center; */
-  }
-}
-.artworkDetailImg img {
-  width: 600px;
-  height: 400px;
-  overflow: hidden;
-  display: flex;
-  object-fit: cover;
-}
-@media screen and (max-width: 768px) {
-  .artworkDetailImg img {
-    width: 500px;
-    height: 300px;
-  }
-}
-@media screen and (max-width: 425px) {
-    .artworkDetailImg img {
-      width: 300px;
-      height: 150px;
-    }
-    .backArrow{ 
-        margin-left: 40px;
-        font-size: 16px;
-    }
-  }
-  @media screen and (max-width: 375px) {
-    .artworkDetailImg img {
-      width: 200px;
-      height: 120px;
-    }
-    p {
-        font-size: 10px;
-    }
-    h1 {
-        font-size: 10px;
-    }
-    h2 ,strong {
-        font-size: 10px;
-    }
- 
-  }
 
 
 
@@ -116,3 +71,105 @@ strong {
     margin-left: 450px;
     cursor: pointer;
 }
+@media screen and (max-width:600px) {
+  .printBtn {
+    margin-left: 170px;
+  }
+}
+.actions {
+  margin-top: 40px;
+  display: flex;
+  justify-content: end;
+  gap: 5px;
+}
+.editBtn {
+  padding: 5px 20px;
+  text-decoration: none;
+  font-size: 12px;
+  border: 1px solid blue;
+  background-image: linear-gradient(darkblue, darkblue);
+  background-color: blue;
+  color: #fff;
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  background-position-x: right;
+  transition: background-size 500ms;
+}
+.editBtn:hover {
+  background-size: 100% 100%;
+  background-position-x: left; 
+  border: 1px solid darkblue;  
+}
+.deleteBtn {
+  padding: 5px 10px;
+  font-size: 12px;
+  border: 1px solid red;
+  background-color: red;
+  color: #fff;
+  cursor: pointer;
+  background-image: linear-gradient(darkred,darkred);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  background-position-x: right;
+  transition: background-size 500ms;
+}
+.deleteBtn:hover {
+  background-size: 100% 100%;
+  background-position-x: left;  
+  border: 1px solid darkred; 
+}
+
+@media screen and (max-width: 1024px) {
+  .detailsPage {
+    grid-template-columns: repeat(1, 1fr);
+    /* text-align: center; */
+  }
+}
+.artworkDetailImg img {
+  width: 600px;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  object-fit: cover;
+}
+@media screen and (max-width: 768px) {
+  .artworkDetailImg img {
+    width: 500px;
+    height: 300px;
+  }
+}
+@media screen and (max-width: 425px) {
+    .artworkDetailImg img {
+      width: 300px;
+      height: 150px;
+    }
+    .backArrow{ 
+        margin-left: 40px;
+        font-size: 16px;
+    }
+    p {
+      font-size: 12px;
+  }
+  h1 {
+      font-size: 14px;
+  }
+  h2 ,strong {
+      font-size: 12px;
+  }
+  }
+  @media screen and (max-width: 375px) {
+    .artworkDetailImg img {
+      width: 200px;
+      height: 120px;
+    }
+    p {
+        font-size: 10px;
+    }
+    h1 {
+        font-size: 10px;
+    }
+    h2 ,strong {
+        font-size: 10px;
+    }
+ 
+  }

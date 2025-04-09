@@ -56,9 +56,12 @@
         gap: 15px;
     }
 }
-    
+  .goToDetailPage {
+    text-decoration: none;
+  }  
 
 .artworkCard {
+  
     background: linear-gradient(180deg, #ffffff, #9999994f);
     max-width: 300px;
 }
@@ -81,13 +84,13 @@
     padding: 5px;
     margin: 0px !important;
 }
-.artworkBtn {
+/* .artworkBtn {
     margin-top: 40px;
     display: flex;
     justify-content: end;
     gap: 5px;
-}
-.editBtn {
+} */
+/* .editBtn {
     padding: 5px 20px;
     text-decoration: none;
     font-size: 12px;
@@ -122,7 +125,7 @@
     background-size: 100% 100%;
     background-position-x: left;  
     border: 1px solid darkred; 
-}
+} */
 
 /*  */
 
