@@ -127,7 +127,7 @@ strong {
 }
 .artworkDetailImg img {
   width: 600px;
-  height: 400px;
+  height:500px;
   overflow: hidden;
   display: flex;
   object-fit: cover;

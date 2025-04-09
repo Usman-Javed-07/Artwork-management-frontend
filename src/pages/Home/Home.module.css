@@ -236,16 +236,31 @@
   
   /* Advanced Search Toggle */
 .advancedSearchToggle {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    margin: 20px 0;
+    width: 85%;
+    max-width: 1900px;
     border: none;
     background: transparent;
     padding: 10px 20px;
-
-    font-size: 16px;
+    font-size: 14px;
+    color: #000000b2;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    letter-spacing: 1px;
+
+  }
+  .advancedSearchContainer {
+    overflow: hidden; 
+    max-height: 0; 
+    opacity: 0;
+    transition: max-height 1s ease, opacity 1s ease; 
   }
   
-  .advancedSearchToggle:hover {
-    background-color: #e0e0e0;
+  .advancedSearchContainer.visible {
+    max-height: 500px; 
+    opacity: 1; 
   }
