@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
-import { getArtworks} from "../../services/artworkService";
+import { getArtworks } from "../../services/artworkService";
 import { Link } from "react-router-dom";
 import styles from "../Home/Home.module.css";
 import { toast } from 'react-toastify';
 import { useAuth } from "../../components/Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa"; 
+import { FaSearch } from 'react-icons/fa';
 
 const ITEMS_PER_PAGE = 8;
 
 const Home = () => {
   const [artworks, setArtworks] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState(""); 
   const { logout } = useAuth();
   const navigate = useNavigate();
 
@@ -29,9 +31,18 @@ const Home = () => {
     const data = await getArtworks();
     setArtworks(data);
   };
+
   const totalPages = Math.ceil(artworks.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const currentArtworks = artworks.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  
+  // Filter artworks based on search query
+  const filteredArtworks = artworks.filter(artwork => 
+    artwork.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    artwork.artist.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    artwork.year.toString().includes(searchQuery) 
+  );
+
+  const currentArtworks = filteredArtworks.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   const handlePageChange = (page) => {
     if (page >= 1 && page <= totalPages) {
@@ -39,7 +50,6 @@ const Home = () => {
     }
   };
 
-  // Generate dynamic pagination buttons
   const renderPageNumbers = () => {
     const pages = [];
     const maxVisiblePages = 3;
@@ -76,7 +86,6 @@ const Home = () => {
         );
       }
       return (
-
         <button
           key={page}
           onClick={() => handlePageChange(page)}
@@ -87,53 +96,69 @@ const Home = () => {
       );
     });
   };
-  
+
   return (
-   <>
-    <div className={styles.homeContainer}>
-      <nav className={styles.navArt}>
-        <Link className={styles.addArtwork} to="/ArtworkList">Add New Artwork</Link>
-        <div>
-        <a href="#" onClick={handleLogout} className={styles.addArtwork}>Logout</a>
-       </div>
-      </nav>
-
-      <div className={styles.artworkGrid}>
-        {currentArtworks.map((art) => (
-          <Link to={`/ArtworkDetail/${art.id}`} className={styles.goToDetailPage}>
-          <div key={art.id} className={styles.artworkCard}>
-              <img src={`http://localhost:5000${art.pictureUrl}`} alt={art.title} />
-            
-            <div className={styles.artworkInfo}>
-              <p>{art.title}</p>
-              <p>{art.artist} - {art.year}</p>
-            </div>
+    <>
+      <div className={styles.homeContainer}>
+        <nav className={styles.navArt}>
+          <Link className={styles.addArtwork} to="/ArtworkList">Add New Artwork</Link>
+          <div>
+            <a href="#" onClick={handleLogout} className={styles.addArtwork}>Logout</a>
           </div>
-          </Link>
-        ))}
+        </nav>
+
+        {/* Search Input */}
+      
+
+<div className={styles.searchContainer}>
+  <div className={styles.inputWrapper}>
+    <input
+      type="text"
+      placeholder="Search artworks..."
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+      className={styles.searchInput}
+    />
+    <FaSearch className={styles.searchIcon} />
+  </div>
+</div>
+
+
+        <div className={styles.artworkGrid}>
+          {currentArtworks.map((art) => (
+            <Link to={`/ArtworkDetail/${art.id}`} className={styles.goToDetailPage} key={art.id}>
+              <div className={styles.artworkCard}>
+                <img src={`http://localhost:5000${art.pictureUrl}`} alt={art.title} />
+                <div className={styles.artworkInfo}>
+                  <p>{art.title}</p>
+                  <p>{art.artist} - {art.year}</p>
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+
+        {/* Modern Pagination */}
+        <div className={styles.pagination}>
+          <button
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className={styles.arrowBtn}
+          >
+            <FaAngleLeft />
+          </button>
+
+          {renderPageNumbers()}
+
+          <button
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className={styles.arrowBtn}
+          >
+            <FaAngleRight />
+          </button>
+        </div>
       </div>
-
-      {/* Modern Pagination */}
-      <div className={styles.pagination}>
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className={styles.arrowBtn}
-        >
-          <FaAngleLeft />
-        </button>
-
-        {renderPageNumbers()}
-
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className={styles.arrowBtn}
-        >
-          <FaAngleRight />
-        </button>
-      </div>
-    </div>
     </>
   );
 };
