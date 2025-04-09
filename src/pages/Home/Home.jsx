@@ -23,6 +23,9 @@ const Home = () => {
     technique: "",
     dimensions: "",
     medium: "",
+    provenance:"",
+    literatureList: "",
+    exhibitionList: "",
   });
 
   const [isAdvancedSearchVisible, setIsAdvancedSearchVisible] = useState(false);
@@ -75,7 +78,17 @@ const Home = () => {
         .includes(advancedFilters.dimensions.toLowerCase()) &&
         artwork.medium
         ?.toLowerCase()
-        .includes(advancedFilters.medium.toLowerCase())
+        .includes(advancedFilters.medium.toLowerCase()) && 
+        artwork.provenance
+        ?.toLowerCase()
+        .includes(advancedFilters.provenance.toLowerCase()) &&
+        artwork.literatureList
+        ?.toLowerCase()
+        .includes(advancedFilters.literatureList.toLowerCase()) &&
+        artwork.exhibitionList
+        ?.toLowerCase()
+        .includes(advancedFilters.exhibitionList.toLowerCase()) 
+      
     );
   };
 
@@ -265,6 +278,48 @@ const Home = () => {
                 setAdvancedFilters({
                   ...advancedFilters,
                   medium: e.target.value,
+                })
+              }
+            />
+          </div>
+          <div>
+            <label>Provenance:</label>
+            <input
+              className={styles.ArtworkFormInput}
+              type="text"
+              value={advancedFilters.provenance}
+              onChange={(e) =>
+                setAdvancedFilters({
+                  ...advancedFilters,
+                  provenance: e.target.value,
+                })
+              }
+            />
+          </div>
+          <div>
+            <label>Literature List:</label>
+            <input
+              className={styles.ArtworkFormInput}
+              type="text"
+              value={advancedFilters.literatureList}
+              onChange={(e) =>
+                setAdvancedFilters({
+                  ...advancedFilters,
+                  literatureList: e.target.value,
+                })
+              }
+            />
+          </div>
+          <div>
+            <label>Exhibition List:</label>
+            <input
+              className={styles.ArtworkFormInput}
+              type="text"
+              value={advancedFilters.exhibitionList}
+              onChange={(e) =>
+                setAdvancedFilters({
+                  ...advancedFilters,
+                  exhibitionList: e.target.value,
                 })
               }
             />

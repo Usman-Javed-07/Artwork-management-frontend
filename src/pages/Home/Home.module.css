@@ -269,6 +269,32 @@
     padding: 30px;
     border-radius: 5px;
   }
+  @media screen and (max-width: 1024px) {
+    .advancedSearchContainer {
+        grid-template-columns: repeat(3,1fr);
+        max-width: 900px;
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .advancedSearchContainer {
+        grid-template-columns: repeat(2,1fr);
+        max-width: 550px;
+    }
+  }
+  @media screen and (max-width: 500px) {
+    .advancedSearchContainer {
+        display: flex;
+        flex-direction: column;
+        max-width: 290px;
+        align-items: center;
+        overflow: scroll;
+    }
+  }
+  @media screen and (max-width: 375px) {
+    .advancedSearchContainer {
+        max-width: 240px;
+    }
+  }
   label {
     display: block;
     font-weight: 600;
@@ -309,5 +335,10 @@
 }
 .ArtworkFormInput:hover {
     border-color: #bbb;
+  }
+  @media screen and (max-width: 425px) {
+    .ArtworkFormInput{
+        max-width: 150px;
+    }
   }
   
