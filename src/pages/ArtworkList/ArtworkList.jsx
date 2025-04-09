@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import styles from "../ArtworkList/ArtworkList.module.css";
+import { toast} from 'react-toastify';
 
 const ArtworkForm = () => {
   const [dimensionValue, setDimensionValue] = useState('');
@@ -47,8 +48,34 @@ const ArtworkForm = () => {
   const [newTechnique, setNewTechnique] = useState("");
   const [newSubTechnique, setNewSubTechnique] = useState("");
   const [subTechniqueVisible, setSubTechniqueVisible] = useState(true); 
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
   const { id } = useParams();
+
+  const validateForm = () => {
+    console.log("Form data during validation:", form);
+    const newErrors = {};
+    
+    if (!form.artist.trim()) newErrors.artist = "Artist is required.";
+    if (!form.title.trim()) newErrors.title = "Title is required.";
+    if (!form.year || form.year < 1000 || form.year > new Date().getFullYear()) {
+      newErrors.year = "Enter a valid year.";
+    }
+    if (!dimensionValue || dimensionValue <= 0)
+      newErrors.dimensionValue = "Enter a valid dimension value.";
+    if (!dimensionUnit)
+      newErrors.dimensionUnit = "Please select a dimension unit.";
+    if (!form.technique)
+      newErrors.technique = "Technique is required.";
+    if (!form.medium)
+      newErrors.medium = "Medium is required.";
+    if (!form.invoice)
+      newErrors.invoice = "Invoice file is required.";
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+  
+  
 
   useEffect(() => {
     if (id) {
@@ -128,7 +155,10 @@ const ArtworkForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!validateForm()) {
+      toast.error("Please correct the errors in the form before submitting.");
+      return;
+    }
     const formData = new FormData();
     Object.keys(form).forEach((key) => {
       if (key !== "invoice") {
@@ -179,42 +209,45 @@ const ArtworkForm = () => {
           <label>
             Artist
             <input
-              className={styles.ArtworkFormInput}
+               className={`${styles.ArtworkFormInput} ${errors.artist ? styles.inputError : ""}`}
               type="text"
               name="artist"
               value={form.artist}
               onChange={handleChange}
               placeholder="Artist"
-              required
+            
             />
+            {errors.artist && <div className={styles.errorMessage}>{errors.artist}</div>}
           </label>
 
           {/* Title Field */}
           <label>
             Title
             <input
-              className={styles.ArtworkFormInput}
+              className={`${styles.ArtworkFormInput} ${errors.title ? styles.inputError : ""}`} 
               type="text"
               name="title"
               value={form.title}
               onChange={handleChange}
               placeholder="Title"
-              required
+            
             />
+            {errors.title && <div className={styles.errorMessage}>{errors.title}</div>}
           </label>
 
           {/* Year Field */}
           <label>
             Year
             <input
-              className={styles.ArtworkFormInput}
+              className={`${styles.ArtworkFormInput} ${errors.year ? styles.inputError : ""}`}
               type="number"
               name="year"
               value={form.year}
               onChange={handleChange}
               placeholder="Year"
-              required
+            
             />
+            {errors.year && <div className={styles.errorMessage}>{errors.year}</div>}
           </label>
 
           {/* Dimensions Field */}
@@ -223,23 +256,25 @@ const ArtworkForm = () => {
   <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
     <input
       type="number"
-      className={styles.ArtworkFormInput}
+      className={`${styles.ArtworkFormInput} ${errors.dimensions ? styles.inputError : ""}`}
       value={dimensionValue}
       onChange={(e) => handleDimensionChange(e.target.value, dimensionUnit)}
       placeholder="Enter value"
-      required
+   
     />
     <select
-      className={styles.ArtworkFormInput}
+      className={`${styles.ArtworkFormInput} ${errors.dimensions ? styles.inputError : ""}`}
       value={dimensionUnit}
       onChange={(e) => handleDimensionChange(dimensionValue, e.target.value)}
-      required
+   
     >
       <option value="">Select unit</option>
       <option value="cm">Centimeters (cm)</option>
       <option value="mm">Millimeters (mm)</option>
     </select>
   </div>
+  {errors.dimensionValue && <div className={styles.errorMessage}>{errors.dimensionValue}</div>}
+  {errors.dimensionUnit && <div className={styles.errorMessage}>{errors.dimensionUnit}</div>}
 </label>
 
 
@@ -247,7 +282,7 @@ const ArtworkForm = () => {
           <label>
         Technique
         <select
-          className={styles.ArtworkFormInput}
+         className={`${styles.ArtworkFormInput} ${errors.technique ? styles.inputError : ""}`}
           name="technique"
           value={form.technique}
           onChange={handleSelectChange}
@@ -260,6 +295,7 @@ const ArtworkForm = () => {
             </option>
           ))}
         </select>
+        {errors.technique && <div className={styles.errorMessage}>{errors.technique}</div>}
       </label>
 
       {/* New Technique Input */}
@@ -301,6 +337,7 @@ const ArtworkForm = () => {
               Add Sub Technique
             </button>
           </label>
+         
         </div>
       )}
 
@@ -321,6 +358,7 @@ const ArtworkForm = () => {
               </option>
             ))}
           </select>
+          
         </label> )}
 
           {/* Medium Field */}
@@ -328,12 +366,12 @@ const ArtworkForm = () => {
             <label>
               New Medium Name
               <input
-                className={styles.ArtworkFormInput}
+                className={`${styles.ArtworkFormInput} ${errors.medium ? styles.inputError : ""}`}
                 type="text"
                 value={newMedium}
                 onChange={(e) => setNewMedium(e.target.value)}
                 placeholder="Enter new medium"
-                required
+              
               />
               <button
                 type="button"
@@ -354,12 +392,13 @@ const ArtworkForm = () => {
                 Add New Medium
               </button>
             </label>
+            
           )}
 
           <label>
             Medium
             <select
-              className={styles.ArtworkFormInput}
+              className={`${styles.ArtworkFormInput} ${errors.medium ? styles.inputError : ""}`}
               name="medium"
               value={form.medium}
               onChange={(e) => {
@@ -369,7 +408,7 @@ const ArtworkForm = () => {
                   setNewMedium("");
                 }
               }}
-              required
+             
             >
               <option value="">Select Medium</option>
               {mediums.map((medium, index) => (
@@ -379,65 +418,71 @@ const ArtworkForm = () => {
               ))}
               <option value="addNew" className={styles.addOption}>Add new medium...</option>
             </select>
+            {errors.medium && <div className={styles.errorMessage}>{errors.medium}</div>}
           </label>
 
           {/* Other Fields */}
           <label>
             Number of Editions
             <input
-              className={styles.ArtworkFormInput}
+              className={`${styles.ArtworkFormInput} ${errors.numberOfEditions ? styles.inputError : ""}`}
               type="number"
               name="numberOfEditions"
               value={form.numberOfEditions}
               onChange={handleChange}
               placeholder="Number of Editions"
             />
+            {errors.numberOfEditions && <div className={styles.errorMessage}>{errors.numberOfEditions}</div>}
           </label>
 
           {/* Edition Number Field */}
           <label>
             Edition Number
             <input
-              className={styles.ArtworkFormInput}
+              className={`${styles.ArtworkFormInput} ${errors.editionNumber ? styles.inputError : ""}`}
               type="text"
               name="editionNumber"
               value={form.editionNumber}
               onChange={handleChange}
               placeholder="Edition Number"
             />
+            {errors.editionNumber && <div className={styles.errorMessage}>{errors.editionNumber}</div>}
           </label>
 
           {/* Provenance Field */}
           <label>
             Provenance
             <textarea
-              className={styles.ArtworkFormInput}
+              className={`${styles.ArtworkFormInput} ${errors.provenance ? styles.inputError : ""}`}
               name="provenance"
               value={form.provenance}
               onChange={handleChange}
               placeholder="Provenance"
             ></textarea>
+            {errors.provenance && <div className={styles.errorMessage}>{errors.provenance}</div>}
           </label>
           <label>
             Literature List
             <textarea
-              className={styles.ArtworkFormInput}
+              className={`${styles.ArtworkFormInput} ${errors.literatureList ? styles.inputError : ""}`}
               name="literatureList"
               value={form.literatureList}
               onChange={handleChange}
               placeholder="Literature List"
             ></textarea>
+            {errors.literatureList && <div className={styles.errorMessage}>{errors.literatureList}</div>}
           </label>
 
           <label>
             Exhibition List
             <textarea
-              className={styles.ArtworkFormInput}
+              className={`${styles.ArtworkFormInput} ${errors.exhibitionList ? styles.inputError : ""}`}
               name="exhibitionList"
               value={form.exhibitionList}
               onChange={handleChange}
               placeholder="Exhibition List"
             ></textarea>
+            {errors.exhibitionList && <div className={styles.errorMessage}>{errors.exhibitionList}</div>}
           </label>
 
           <label>
@@ -453,30 +498,32 @@ const ArtworkForm = () => {
           <label>
             Invoice (Upload as picture or file)
             <input
-              className={styles.ArtworkFormInput}
+              className={`${styles.ArtworkFormInput} ${errors.invoice ? styles.inputError : ""}`}
               type="file"
               name="invoice"
               accept="image/*,.pdf"
               onChange={(e) => setForm({ ...form, invoice: e.target.files[0] })}
-              required
+            
             />
+            {errors.invoice && <div className={styles.errorMessage}>{errors.invoice}</div>}
           </label>
 
           {/* Upload Image Field */}
           <label>
             Upload Image
             <input
-              className={styles.ArtworkFormInput}
+              className={`${styles.ArtworkFormInput} ${errors.image  ? styles.inputError : ""}`}
               type="file"
               onChange={handleFileChange}
-              required
+              
             />
+            {errors.image && <div className={styles.errorMessage}>{errors.image }</div>}
           </label>
 
           <label>
             Upload Additional Pictures (Optional)
             <input
-              className={styles.ArtworkFormInput} 
+              className={styles.ArtworkFormInput}
               type="file"
               name="additionalPictures"
               multiple
@@ -496,7 +543,7 @@ const ArtworkForm = () => {
             </button>
           </div>
         </form>
-        
+
       </div>
     </div>
   );

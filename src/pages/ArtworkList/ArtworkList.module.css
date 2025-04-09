@@ -154,6 +154,17 @@
     background: #3498db;
     color: #fff;
 }
+.inputError {
+    border-color: red;
+  }
+  
+  .errorMessage {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 4px;
+  }
+  
+
 @media screen and (max-width:500px) {
     .addSubTechnique {
         padding: 8px;
